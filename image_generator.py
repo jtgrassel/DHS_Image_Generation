@@ -43,8 +43,9 @@ def genRandomizer(dist, params):
         rand_num = random.triangular(params[0], params[1], params[2])
     return rand_num
 
-save_dir = "Sample_Dataset/Generic/Easy/"
-save_name = "bat-7"
+mpeg7_dir = "C:/Users/Joshua/Documents/DHS Project/MPEG7dataset/original/"
+save_dir = "Temp/"
+save_name = "no-bat-7"
 
 params =  {
     "background": {
@@ -76,7 +77,7 @@ params =  {
 }
 
 find_images = [
-    {"name":"bat-7.gif", "depth":0.5},
+    #{"name":"bat-7.gif", "depth":0.5},
 ]
 
 excluded_images = [
@@ -102,7 +103,7 @@ excluded_images = [
     {"name":"bat-20.gif"}
 ]
 
-fileList = allFiles("Datasets/MPEG7dataset/original")
+fileList = allFiles(mpeg7_dir)
 
 #remove excluded images
 for item in excluded_images:
@@ -150,7 +151,7 @@ for item in find_images:
 #start pasting images
 for key in imageDic:
     newImageDir = imageDic[key]["imageDir"]
-    newImage = Image.open("Datasets/MPEG7dataset/original/" + newImageDir)
+    newImage = Image.open(mpeg7_dir + newImageDir)
     composite = advPaste(
         newImage,
         composite,
@@ -166,7 +167,7 @@ composite.save(save_dir + save_name + ".png", 'PNG')
 #make the easy find image
 for i in findIndices:
     findImageDir = imageDic[i]["imageDir"]
-    newImage = Image.open("Datasets/MPEG7dataset/original/" + findImageDir)
+    newImage = Image.open(mpeg7_dir + findImageDir)
     composite = advPaste(
         newImage,
         composite,
