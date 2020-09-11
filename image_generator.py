@@ -45,7 +45,7 @@ def genRandomizer(dist, params):
 
 mpeg7_dir = "C:/Users/Joshua/Documents/DHS Project/MPEG7dataset/original/"
 save_dir = "Temp/"
-save_name = "no-bat-7"
+save_name = "large_image"
 
 params =  {
     "background": {
@@ -55,7 +55,7 @@ params =  {
     },
     "scale" : {
         "dist" : "U",
-        "params" : (0.3, 0.4)
+        "params" : (0.3, 0.3)
     },
     "rotation" : {
         "dist" : "U",
@@ -67,12 +67,12 @@ params =  {
             "red" : (10, 255),
             "green" : (10, 255),
             "blue" : (10, 255),
-            "alpha" : (150, 180)
+            "alpha" : (255, 255)
         }
     },
     "centers" : {
-        "r" : 150,
-        "k" : 32
+        "r" : 100,
+        "k" : 16
     }
 }
 
@@ -81,26 +81,26 @@ find_images = [
 ]
 
 excluded_images = [
-    {"name":"bat-1.gif"},
-    {"name":"bat-2.gif"},
-    {"name":"bat-3.gif"},
-    {"name":"bat-4.gif"},
-    {"name":"bat-5.gif"},
-    {"name":"bat-6.gif"},
-    {"name":"bat-7.gif"},
-    {"name":"bat-8.gif"},
-    {"name":"bat-9.gif"},
-    {"name":"bat-10.gif"},
-    {"name":"bat-11.gif"},
-    {"name":"bat-12.gif"},
-    {"name":"bat-13.gif"},
-    {"name":"bat-14.gif"},
-    {"name":"bat-15.gif"},
-    {"name":"bat-16.gif"},
-    {"name":"bat-17.gif"},
-    {"name":"bat-18.gif"},
-    {"name":"bat-19.gif"},
-    {"name":"bat-20.gif"}
+    # {"name":"bat-1.gif"},
+    # {"name":"bat-2.gif"},
+    # {"name":"bat-3.gif"},
+    # {"name":"bat-4.gif"},
+    # {"name":"bat-5.gif"},
+    # {"name":"bat-6.gif"},
+    # {"name":"bat-7.gif"},
+    # {"name":"bat-8.gif"},
+    # {"name":"bat-9.gif"},
+    # {"name":"bat-10.gif"},
+    # {"name":"bat-11.gif"},
+    # {"name":"bat-12.gif"},
+    # {"name":"bat-13.gif"},
+    # {"name":"bat-14.gif"},
+    # {"name":"bat-15.gif"},
+    # {"name":"bat-16.gif"},
+    # {"name":"bat-17.gif"},
+    # {"name":"bat-18.gif"},
+    # {"name":"bat-19.gif"},
+    # {"name":"bat-20.gif"}
 ]
 
 fileList = allFiles(mpeg7_dir)
