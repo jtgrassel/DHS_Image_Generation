@@ -1,7 +1,15 @@
 import json
-from os import listdir
-from os.path import isfile, join
 from image_generator_fun import imageGen
+from image_generator_fun import allFiles
 
-imageGen("JSON_Files/bat-7.json")
-print("complete")
+jsonDir = "JSON_Files/"
+jsonFiles = allFiles(jsonDir)
+
+count = 0
+for jsonFile in jsonFiles:
+    imageGen(jsonDir + jsonFile)
+    count += 1
+    status = 100*(count/len(jsonFiles))
+    print("Status:" + str(status))
+
+print("Complete")
