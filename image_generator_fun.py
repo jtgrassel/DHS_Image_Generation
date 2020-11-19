@@ -45,6 +45,8 @@ def genRandomizer(dist, params):
 
 def imageGen(json_dir):
 
+    mpeg7_dir = "C:/Users/Joshua/Documents/DHS Project/MPEG7dataset/original/"
+
     with open(json_dir) as f:
         json_data = json.load(f)
 
@@ -54,7 +56,7 @@ def imageGen(json_dir):
     save_dir = json_data['save_dir']
     save_name = json_data['save_name']
 
-    fileList = allFiles("MPEG7dataset/original")
+    fileList = allFiles(mpeg7_dir)
 
     #remove excluded images
     for item in excluded_images:
@@ -101,7 +103,7 @@ def imageGen(json_dir):
     #start pasting images
     for key in imageDic:
         newImageDir = imageDic[key]["imageDir"]
-        newImage = Image.open("MPEG7dataset/original/" + newImageDir)
+        newImage = Image.open(mpeg7_dir + newImageDir)
         composite = advPaste(
             newImage,
             composite,
@@ -117,7 +119,7 @@ def imageGen(json_dir):
     #make the easy find image
     for i in findIndices:
         findImageDir = imageDic[i]["imageDir"]
-        newImage = Image.open("MPEG7dataset/original/" + findImageDir)
+        newImage = Image.open(mpeg7_dir + findImageDir)
         composite = advPaste(
             newImage,
             composite,

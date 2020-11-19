@@ -2,7 +2,7 @@ import json
 from image_generator_fun import imageGen
 from image_generator_fun import allFiles
 
-jsonDir = "JSON_Files/"
+jsonDir = "C:/Users/Joshua/Documents/DHS Project/JSON_Files/"
 jsonFiles = allFiles(jsonDir)
 
 count = 0

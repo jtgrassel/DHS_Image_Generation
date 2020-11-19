@@ -1,8 +1,8 @@
 import json
 
-json_dir = "JSON_Files/"
-img_dir = "temp/DOEtest/"
-group_name = "no_bat"
+json_dir = "C:/Users/Joshua/Documents/DHS Project/JSON_Files/"
+img_dir = "C:/Users/Joshua/Documents/DHS Project/temp/"
+group_name = "turtle"
 
 #make arrays for all the parameters
 #save name?
@@ -13,42 +13,39 @@ backgroundA = [
 
 scaleA = [("T", .15, .2, .25), ("T", .25, .3, .35), ("T", .35, .4, .45)]
 
-rotationA = [("U", 0, 365), ("T", -15, 0, 15)]
+rotationA = [("U", 0, 365)]
 
 colorA = [
-    ("U", (10, 255), (10, 255), (10, 255), (140, 170)), 
-    ("U", (10, 255), (10, 255), (10, 255), (100, 200)), 
-    ("T", (202, 212, 222), (77, 87, 97), (227, 237, 247), (130, 155, 180)),
-    ("T", (0, 30, 60), (120, 150, 180), (137, 167, 197), (130, 155, 180))
+    ("U", (10, 255), (10, 255), (10, 255), (140, 170))
 ]
 
-centersA = [(100, 32), (125, 32), (150, 32)]
+centersA = [(80, 32), (100, 32), (125, 32), (150, 32)]
 
 find_images = [
-    # {"name":"butterfly-14.gif", "depth":0.5},
+    {"name":"turtle-10.gif", "depth":0.5},
 ]
 
 excluded_images = [
-    {"name":"bat-1.gif"},
-    {"name":"bat-2.gif"},
-    {"name":"bat-3.gif"},
-    {"name":"bat-4.gif"},
-    {"name":"bat-5.gif"},
-    {"name":"bat-6.gif"},
-    {"name":"bat-7.gif"},
-    {"name":"bat-8.gif"},
-    {"name":"bat-9.gif"},
-    {"name":"bat-10.gif"},
-    {"name":"bat-11.gif"},
-    {"name":"bat-12.gif"},
-    {"name":"bat-13.gif"},
-    {"name":"bat-14.gif"},
-    {"name":"bat-15.gif"},
-    {"name":"bat-16.gif"},
-    {"name":"bat-17.gif"},
-    {"name":"bat-18.gif"},
-    {"name":"bat-19.gif"},
-    {"name":"bat-20.gif"}
+    {"name":"turtle-1.gif"},
+    {"name":"turtle-2.gif"},
+    {"name":"turtle-3.gif"},
+    {"name":"turtle-4.gif"},
+    {"name":"turtle-5.gif"},
+    {"name":"turtle-6.gif"},
+    {"name":"turtle-7.gif"},
+    {"name":"turtle-8.gif"},
+    {"name":"turtle-9.gif"},
+    {"name":"turtle-10.gif"},
+    {"name":"turtle-11.gif"},
+    {"name":"turtle-12.gif"},
+    {"name":"turtle-13.gif"},
+    {"name":"turtle-14.gif"},
+    {"name":"turtle-15.gif"},
+    {"name":"turtle-16.gif"},
+    {"name":"turtle-17.gif"},
+    {"name":"turtle-18.gif"},
+    {"name":"turtle-19.gif"},
+    {"name":"turtle-20.gif"}
 ]
 
 save_num = 0
