@@ -2,6 +2,7 @@ import json
 
 json_dir = "JSON_Files/"
 img_dir = "temp/DOEtest/"
+group_name = "no_bat"
 
 #make arrays for all the parameters
 #save name?
@@ -18,13 +19,13 @@ colorA = [
     ("U", (10, 255), (10, 255), (10, 255), (140, 170)), 
     ("U", (10, 255), (10, 255), (10, 255), (100, 200)), 
     ("T", (202, 212, 222), (77, 87, 97), (227, 237, 247), (130, 155, 180)),
-    ("T", (10, 30, 50), (130, 150, 170), (147, 167, 187), (130, 155, 180))
+    ("T", (0, 30, 60), (120, 150, 180), (137, 167, 197), (130, 155, 180))
 ]
 
 centersA = [(100, 32), (125, 32), (150, 32)]
 
 find_images = [
-    {"name":"bat-7.gif", "depth":0.5},
+    # {"name":"butterfly-14.gif", "depth":0.5},
 ]
 
 excluded_images = [
@@ -60,7 +61,7 @@ for backItem in backgroundA:
                     #make a dictionary for each combination with some variable name?
                     #maybe just write the json file here?
                     save_num += 1
-                    save_name = "img" + str(save_num)
+                    save_name = group_name + "_img" + str(save_num)
                     json_dict = {
                         "save_dir":img_dir,
                         "save_name":save_name,
