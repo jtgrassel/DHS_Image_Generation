@@ -164,7 +164,7 @@ for item in find_images:
 #start pasting images
 for key in imageDic:
     newImageDir = imageDic[key]["imageDir"]
-    newImage = Image.open("MPEG7dataset/original/" + newImageDir)
+    newImage = Image.open(mpeg7_dir + newImageDir)
     composite = advPaste(
         newImage,
         composite,
@@ -180,7 +180,7 @@ composite.save(save_dir + save_name + ".png", 'PNG')
 #make the easy find image
 for i in findIndices:
     findImageDir = imageDic[i]["imageDir"]
-    newImage = Image.open("MPEG7dataset/original/" + findImageDir)
+    newImage = Image.open(mpeg7_dir + findImageDir)
     composite = advPaste(
         newImage,
         composite,
