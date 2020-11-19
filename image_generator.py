@@ -43,67 +43,80 @@ def genRandomizer(dist, params):
         rand_num = random.triangular(params[0], params[1], params[2])
     return rand_num
 
-mpeg7_dir = "C:/Users/Joshua/Documents/DHS Project/MPEG7dataset/original/"
-save_dir = "Temp/"
-save_name = "large_image"
+JSON_dir = "JSON_Files"
+JSON_file_list = allFiles(JSON_dir)
 
-params =  {
-    "background": {
-        "color" : "black",
-        "width" : 1920,
-        "height" : 1080
-    },
-    "scale" : {
-        "dist" : "U",
-        "params" : (0.3, 0.3)
-    },
-    "rotation" : {
-        "dist" : "U",
-        "params" : (0, 365)
-    },
-    "color" : {
-        "dist" : "U",
-        "channels" : {
-            "red" : (10, 255),
-            "green" : (10, 255),
-            "blue" : (10, 255),
-            "alpha" : (255, 255)
-        }
-    },
-    "centers" : {
-        "r" : 100,
-        "k" : 16
-    }
-}
+for json_file in JSON_file_list:
+    with open(JSON_dir + "/" + json_file) as f:
+        json_data = json.load(f)
 
-find_images = [
-    #{"name":"bat-7.gif", "depth":0.5},
-]
+print(json_data)
 
-excluded_images = [
-    # {"name":"bat-1.gif"},
-    # {"name":"bat-2.gif"},
-    # {"name":"bat-3.gif"},
-    # {"name":"bat-4.gif"},
-    # {"name":"bat-5.gif"},
-    # {"name":"bat-6.gif"},
-    # {"name":"bat-7.gif"},
-    # {"name":"bat-8.gif"},
-    # {"name":"bat-9.gif"},
-    # {"name":"bat-10.gif"},
-    # {"name":"bat-11.gif"},
-    # {"name":"bat-12.gif"},
-    # {"name":"bat-13.gif"},
-    # {"name":"bat-14.gif"},
-    # {"name":"bat-15.gif"},
-    # {"name":"bat-16.gif"},
-    # {"name":"bat-17.gif"},
-    # {"name":"bat-18.gif"},
-    # {"name":"bat-19.gif"},
-    # {"name":"bat-20.gif"}
-]
+params = json_data['params']
+find_images = json_data['find_images']
+excluded_images = json_data['excluded_images']
+save_dir = json_data['save_dir']
+save_name = json_data['save_name']
 
-fileList = allFiles(mpeg7_dir)
+# save_dir = "temp/"
+# save_name = "bat-7"
+# params =  {
+#     "background": {
+#         "color" : "black",
+#         "width" : 1920,
+#         "height" : 1080
+#     },
+#     "scale" : {
+#         "dist" : "U",
+#         "params" : (0.3, 0.4)
+#     },
+#     "rotation" : {
+#         "dist" : "U",
+#         "params" : (0, 365)
+#     },
+#     "color" : {
+#         "dist" : "U",
+#         "channels" : {
+#             "red" : (10, 255),
+#             "green" : (10, 255),
+#             "blue" : (10, 255),
+#             "alpha" : (150, 180)
+#         }
+#     },
+#     "centers" : {
+#         "r" : 150,
+#         "k" : 32
+#     }
+# }
+
+# find_images = [
+#     {"name":"bat-7.gif", "depth":0.5},
+# ]
+
+# excluded_images = [
+#     {"name":"bat-1.gif"},
+#     {"name":"bat-2.gif"},
+#     {"name":"bat-3.gif"},
+#     {"name":"bat-4.gif"},
+#     {"name":"bat-5.gif"},
+#     {"name":"bat-6.gif"},
+#     {"name":"bat-7.gif"},
+#     {"name":"bat-8.gif"},
+#     {"name":"bat-9.gif"},
+#     {"name":"bat-10.gif"},
+#     {"name":"bat-11.gif"},
+#     {"name":"bat-12.gif"},
+#     {"name":"bat-13.gif"},
+#     {"name":"bat-14.gif"},
+#     {"name":"bat-15.gif"},
+#     {"name":"bat-16.gif"},
+#     {"name":"bat-17.gif"},
+#     {"name":"bat-18.gif"},
+#     {"name":"bat-19.gif"},
+#     {"name":"bat-20.gif"}
+# ]
+
+fileList = allFiles("MPEG7dataset/original")
 
 #remove excluded images
 for item in excluded_images:
