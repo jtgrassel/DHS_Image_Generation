@@ -11,15 +11,15 @@ backgroundA = [
     ("beige", 1080, 1080)
 ]
 
-scaleA = [("T", .15, .2, .25), ("T", .25, .3, .35), ("T", .35, .4, .45)]
+scaleA = [("T", .15, .2, .25)]
 
 rotationA = [("U", 0, 365)]
 
 colorA = [
-    ("U", (10, 255), (10, 255), (10, 255), (140, 170))
+    ("M", ((255, 0, 0, 100), (0, 255, 0, 100), (0, 0, 255, 100)))
 ]
 
-centersA = [(80, 32), (100, 32), (125, 32), (150, 32)]
+centersA = [(100, 32)]
 
 find_images = [
     {"name":"turtle-10.gif", "depth":0.5},
@@ -78,12 +78,7 @@ for backItem in backgroundA:
                             },
                             "color": {
                                 "dist": colorItem[0],
-                                "channels": {
-                                    "red": colorItem[1],
-                                    "green": colorItem[2],
-                                    "blue": colorItem[3],
-                                    "alpha": colorItem[4]
-                                }
+                                "args": colorItem[1]
                             },
                             "centers": {
                                 "r": centersItem[0],
