@@ -22,10 +22,10 @@ def getKeysByValue(dictOfElements, valueToFind, index):
 def colorRandomizer(dist, args):
     if dist == "U":
         newColor = (
-            int(round(random.uniform(args[0][0], args[0][1]))),
             int(round(random.uniform(args[1][0], args[1][1]))),
             int(round(random.uniform(args[2][0], args[2][1]))),
-            int(round(random.uniform(args[3][0], args[3][1])))
+            int(round(random.uniform(args[3][0], args[3][1]))),
+            int(round(random.uniform(args[4][0], args[4][1])))
         )
     if dist == "T":
         newColor = (
@@ -35,13 +35,14 @@ def colorRandomizer(dist, args):
             int(round(random.triangular(args[3][0], args[3][1], args[3][2])))
         )
     if dist == "M":
-        newIndex = random.randint(0, len(args)-1)
-        newColor = (
-            args[newIndex][0],
-            args[newIndex][1],
-            args[newIndex][2],
-            args[newIndex][3]
-        )
+        increments = 10
+        newIndex = random.randint(0, len(args)-2)
+        newIncrement = random.randint(0, increments)
+        newRed = ((args[newIndex + 1][0] - args[newIndex][0])/(increments+1))*newIncrement + args[newIndex][0]
+        newGreen = ((args[newIndex + 1][1] - args[newIndex][1])/(increments+1))*newIncrement + args[newIndex][1]
+        newBlue = ((args[newIndex + 1][2] - args[newIndex][2])/(increments+1))*newIncrement + args[newIndex][2]
+        newAlpha = ((args[newIndex + 1][3] - args[newIndex][3])/(increments+1))*newIncrement + args[newIndex][3]
+        newColor = (int(round(newRed)), int(round(newGreen)), int(round(newBlue)), int(round(newAlpha)))
     return newColor
 
 def genRandomizer(dist, params):
