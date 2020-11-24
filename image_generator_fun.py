@@ -19,21 +19,30 @@ def getKeysByValue(dictOfElements, valueToFind, index):
             listOfKeys.append(item[0])
     return  listOfKeys
 
-def colorRandomizer(dist, red, green, blue, alpha):
+def colorRandomizer(dist, args):
     if dist == "U":
         newColor = (
-            int(round(random.uniform(red[0], red[1]))),
-            int(round(random.uniform(green[0], green[1]))),
-            int(round(random.uniform(blue[0], blue[1]))),
-            int(round(random.uniform(alpha[0], alpha[1])))
+            int(round(random.uniform(args[1][0], args[1][1]))),
+            int(round(random.uniform(args[2][0], args[2][1]))),
+            int(round(random.uniform(args[3][0], args[3][1]))),
+            int(round(random.uniform(args[4][0], args[4][1])))
         )
     if dist == "T":
         newColor = (
-            int(round(random.triangular(red[0], red[1], red[2]))),
-            int(round(random.triangular(green[0], green[1], green[2]))),
-            int(round(random.triangular(blue[0], blue[1], blue[2]))),
-            int(round(random.triangular(alpha[0], alpha[1], alpha[2])))
+            int(round(random.triangular(args[0][0], args[0][1], args[0][2]))),
+            int(round(random.triangular(args[1][0], args[1][1], args[1][2]))),
+            int(round(random.triangular(args[2][0], args[2][1], args[2][2]))),
+            int(round(random.triangular(args[3][0], args[3][1], args[3][2])))
         )
+    if dist == "M":
+        increments = 10
+        newIndex = random.randint(0, len(args)-2)
+        newIncrement = random.randint(0, increments)
+        newRed = ((args[newIndex + 1][0] - args[newIndex][0])/(increments+1))*newIncrement + args[newIndex][0]
+        newGreen = ((args[newIndex + 1][1] - args[newIndex][1])/(increments+1))*newIncrement + args[newIndex][1]
+        newBlue = ((args[newIndex + 1][2] - args[newIndex][2])/(increments+1))*newIncrement + args[newIndex][2]
+        newAlpha = ((args[newIndex + 1][3] - args[newIndex][3])/(increments+1))*newIncrement + args[newIndex][3]
+        newColor = (int(round(newRed)), int(round(newGreen)), int(round(newBlue)), int(round(newAlpha)))
     return newColor
 
 def genRandomizer(dist, params):
@@ -77,16 +86,12 @@ def imageGen(json_dir):
         new_entry = {
             num: {
                 "imageDir":fileList[random.randint(0, len(fileList)-1)],
-                #"imageDir":"device3-1.gif",
                 "center":newCenter,
                 "scale":genRandomizer(params["scale"]["dist"], params["scale"]["params"]),
                 "rotation":genRandomizer(params["rotation"]["dist"], params["rotation"]["params"]),
                 "color":colorRandomizer(
                     params["color"]["dist"], 
-                    params["color"]["channels"]["red"], 
-                    params["color"]["channels"]["green"],
-                    params["color"]["channels"]["blue"],
-                    params["color"]["channels"]["alpha"]
+                    params["color"]["args"]
                 )
             }
         }

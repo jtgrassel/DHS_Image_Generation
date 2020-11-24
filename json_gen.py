@@ -2,7 +2,7 @@ import json
 
 json_dir = "C:/Users/Joshua/Documents/DHS Project/JSON_Files/"
 img_dir = "C:/Users/Joshua/Documents/DHS Project/temp/"
-group_name = "turtle"
+group_name = "No_BatHoneyPot"
 
 #make arrays for all the parameters
 #save name?
@@ -11,41 +11,44 @@ backgroundA = [
     ("beige", 1080, 1080)
 ]
 
-scaleA = [("T", .15, .2, .25), ("T", .25, .3, .35), ("T", .35, .4, .45)]
+scaleA = [("T", .15, .2, .25)]
 
 rotationA = [("U", 0, 365)]
 
 colorA = [
-    ("U", (10, 255), (10, 255), (10, 255), (140, 170))
+    ("U", ((10, 255), (10, 255), (10, 255), (140, 170)))
 ]
 
-centersA = [(80, 32), (100, 32), (125, 32), (150, 32)]
+centersA = [(150, 32)]
+
+find_image_name = "bat"
+find_image_number = "-5"
 
 find_images = [
-    {"name":"turtle-10.gif", "depth":0.5},
+    {"name":find_image_name + find_image_number + ".gif", "depth":0.5},
 ]
 
 excluded_images = [
-    {"name":"turtle-1.gif"},
-    {"name":"turtle-2.gif"},
-    {"name":"turtle-3.gif"},
-    {"name":"turtle-4.gif"},
-    {"name":"turtle-5.gif"},
-    {"name":"turtle-6.gif"},
-    {"name":"turtle-7.gif"},
-    {"name":"turtle-8.gif"},
-    {"name":"turtle-9.gif"},
-    {"name":"turtle-10.gif"},
-    {"name":"turtle-11.gif"},
-    {"name":"turtle-12.gif"},
-    {"name":"turtle-13.gif"},
-    {"name":"turtle-14.gif"},
-    {"name":"turtle-15.gif"},
-    {"name":"turtle-16.gif"},
-    {"name":"turtle-17.gif"},
-    {"name":"turtle-18.gif"},
-    {"name":"turtle-19.gif"},
-    {"name":"turtle-20.gif"}
+    {"name":find_image_name + "-1.gif"},
+    {"name":find_image_name + "-2.gif"},
+    {"name":find_image_name + "-3.gif"},
+    {"name":find_image_name + "-4.gif"},
+    {"name":find_image_name + "-5.gif"},
+    {"name":find_image_name + "-6.gif"},
+    {"name":find_image_name + "-7.gif"},
+    {"name":find_image_name + "-8.gif"},
+    {"name":find_image_name + "-9.gif"},
+    {"name":find_image_name + "-10.gif"},
+    {"name":find_image_name + "-11.gif"},
+    {"name":find_image_name + "-12.gif"},
+    {"name":find_image_name + "-13.gif"},
+    {"name":find_image_name + "-14.gif"},
+    {"name":find_image_name + "-15.gif"},
+    {"name":find_image_name + "-16.gif"},
+    {"name":find_image_name + "-17.gif"},
+    {"name":find_image_name + "-18.gif"},
+    {"name":find_image_name + "-19.gif"},
+    {"name":find_image_name + "-20.gif"}
 ]
 
 save_num = 0
@@ -78,12 +81,7 @@ for backItem in backgroundA:
                             },
                             "color": {
                                 "dist": colorItem[0],
-                                "channels": {
-                                    "red": colorItem[1],
-                                    "green": colorItem[2],
-                                    "blue": colorItem[3],
-                                    "alpha": colorItem[4]
-                                }
+                                "args": colorItem[1]
                             },
                             "centers": {
                                 "r": centersItem[0],
