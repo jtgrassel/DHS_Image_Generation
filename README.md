@@ -1,5 +1,9 @@
 # DHS_Image_Generation
 
+# Programs Key
+
+# Generating an Image
+
 # Setting the Image Parameters
 The code generates an image based on the parameters set in the JSON files.
 In the home folder of this project there is a "template.json" that is an example of a working set of parameters used to generate an image.
@@ -31,4 +35,5 @@ The following sections will be used to explain how to change the parameters used
             "color": "beige",
             "width": 1080,
             "height": 1080
+        }
     ```
