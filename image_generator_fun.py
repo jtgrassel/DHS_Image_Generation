@@ -35,7 +35,7 @@ def colorRandomizer(dist, args):
             int(round(random.triangular(args[3][0], args[3][1], args[3][2])))
         )
     if dist == "M":
-        increments = 10
+        increments = 1
         newIndex = random.randint(0, len(args)-2)
         newIncrement = random.randint(0, increments)
         newRed = ((args[newIndex + 1][0] - args[newIndex][0])/(increments+1))*newIncrement + args[newIndex][0]
