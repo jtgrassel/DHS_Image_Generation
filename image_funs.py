@@ -26,7 +26,7 @@ def reColor(img, color): #Changes the white pixels to the defined color
     img.putdata(newData)
     return img
 
-def closeCrop(img): #Crops to the closest white pixels
+def closeCrop(img): #Crops to the closest white pixels (Non-functioning)
     img = img.convert('RGBA')
     datas = img.getdata()
     dim = img.size
@@ -50,7 +50,7 @@ def closeCrop(img): #Crops to the closest white pixels
     img = img.crop(cropBox)
     return img
 
-def squareCrop(img): #Crops to the closes white pixels in the wider dimension, evenly crops the shorter dimensio to make the final result a square
+def squareCrop(img): #Crops to the closes white pixels in the wider dimension, evenly crops the shorter dimensio to make the final result a square (Non functioning)
     img = img.convert('RGBA')
     datas = img.getdata()
     dim = img.size

@@ -4,9 +4,6 @@ json_dir = "C:/Users/Joshua/Documents/DHS Project/JSON_Files/"
 img_dir = "C:/Users/Joshua/Documents/DHS Project/temp/"
 group_name = "ColorMode_No_Bat"
 
-#make arrays for all the parameters
-#save name?
-
 backgroundA = [
     ("beige", 1080, 1080)
 ]

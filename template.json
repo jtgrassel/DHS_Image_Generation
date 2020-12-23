@@ -1,46 +1,28 @@
 {
-	"save_dir": "temp/",
-	"save_name": "bat-7",
+    "save_dir": "C:/Users/Joshua/Documents/DHS Project/temp/",
+    "save_name": "template",
     "params": {
         "background": {
-            "color": "white",
-            "width": 1920,
+            "color": "beige",
+            "width": 1080,
             "height": 1080
         },
         "scale": {
-            "dist": "U",
-            "params": [
-                0.3,
-                0.4
-            ]
+            "dist": "T",
+            "params": [0.15, 0.2, 0.25]
         },
         "rotation": {
             "dist": "U",
-            "params": [
-                0,
-                365
-            ]
+            "params": [0, 365]
         },
         "color": {
             "dist": "U",
-            "channels": {
-                "red": [
-                    10,
-                    255
-                ],
-                "green": [
-                    10,
-                    255
-                ],
-                "blue": [
-                    10,
-                    255
-                ],
-                "alpha": [
-                    150,
-                    180
-                ]
-            }
+            "args": [
+                [10,255],
+                [10,255],
+                [10,255],
+                [140,170]
+            ]
         },
         "centers": {
             "r": 150,
@@ -49,8 +31,7 @@
     },
     "find_images": [
         {
-            "name": "bat-7.gif",
-            "depth": 0.5
+            "name": "bat-1.gif", "depth": 0.4
         }
     ],
     "excluded_images": [
