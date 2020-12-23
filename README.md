@@ -6,14 +6,18 @@ In the home folder of this project there is a "template.json" that is an example
 
 The following sections will be used to explain how to change the parameters used in a JSON file.
 
-1. `size-limit` section in `package.json`:
+1. `save_dir`
+    This is input will dictate where the generated image will be saved. This can be either an absolute or relative path. See two examples below.
 
    ```json
-     "size-limit": [
-       {
-         "path": "index.js",
-         "import": "{ createStore }",
-         "limit": "500 ms"
-       }
-     ]
+        "save_dir": "C:/Users/Joshua/Documents/DHS Project/Image_Output/"
    ```
+    ```json
+        "save_dir": "/Image_Ouput/"
+   ```
+2. `save_name`
+    This input will be the text that is used to name the output files.
+    When run three files will be generated.
+        1) The image using the input parameters named "<save_name>.png"
+        2) Another version of the image that makes the specified find image white named "<save_name>-find.png"
+        3) A .json file that contains the input parameters and additional metadata named "<save_name>.json"
