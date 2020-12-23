@@ -18,6 +18,6 @@ The following sections will be used to explain how to change the parameters used
 2. `save_name`
     This input will be the text that is used to name the output files.
     When run three files will be generated.
-        1) The image using the input parameters named "<save_name>.png"
-        2) Another version of the image that makes the specified find image white named "<save_name>-find.png"
-        3) A .json file that contains the input parameters and additional metadata named "<save_name>.json"
+        1. The image using the input parameters named "<save_name>.png" \n
+        2. Another version of the image that makes the specified find image white named "<save_name>-find.png" \n
+        3. A .json file that contains the input parameters and additional metadata named "<save_name>.json" \n
