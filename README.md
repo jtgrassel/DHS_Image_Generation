@@ -1,6 +1,6 @@
 # DHS_Image_Generation
 
-##Setting the Image Parameters
+# Setting the Image Parameters
 The code generates an image based on the parameters set in the JSON files.
 In the home folder of this project there is a "template.json" that is an example of a working set of parameters used to generate an image.
 
@@ -18,8 +18,9 @@ The following sections will be used to explain how to change the parameters used
 2. `save_name`
     This input will be the text that is used to name the output files.
     When run three files will be generated.
-        1. The image using the input parameters named "<save_name>.png"
+    
+    1. The image using the input parameters named "<save_name>.png"
 
-        2. Another version of the image that makes the specified find image white named "<save_name>-find.png"
-        
-        3. A .json file that contains the input parameters and additional metadata named "<save_name>.json"
+    2. Another version of the image that makes the specified find image white named "<save_name>-find.png"
+
+    3. A .json file that contains the input parameters and additional metadata named "<save_name>.json"
