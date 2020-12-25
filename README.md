@@ -23,7 +23,7 @@ json
 ```
 
 ### 2. Setting up directories
-Three folders will need to be created. For convenience, these folders can be subfolders of the folder that contains the python code.
+Three folders will need to be created. For convenience, these folders can be subfolders of the folder that contains this code.
 
 1. The first will be where the MPEG7 images are stored. All the images should retain their original names.
 

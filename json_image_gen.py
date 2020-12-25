@@ -4,11 +4,11 @@ from image_generator_fun import allFiles
 
 #Location of the JSON file(s) that you wish to use to generate image(s) from
 #JSON files should be formatted as the "template.json" file
-jsonDir = "C:/Users/Joshua/Documents/DHS Project/JSON_Files/"
+jsonDir = "Input_JSON/"
 
 #Location of the unedited MPEG7 images
 #The MPEG7 dataset can be found at the following link: http://www.timeseriesclassification.com/description.php?Dataset=ShapesAll
-mpeg7Dir = "C:/Users/Joshua/Documents/DHS Project/MPEG7dataset/original/"
+mpeg7Dir = "MPEG7/"
 
 jsonFiles = allFiles(jsonDir) #Gets all the JSON files in the provided folder
 
