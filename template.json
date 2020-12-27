@@ -13,7 +13,7 @@
         },
         "rotation": {
             "dist": "U",
-            "params": [0, 365]
+            "params": [0, 360]
         },
         "color": {
             "dist": "U",

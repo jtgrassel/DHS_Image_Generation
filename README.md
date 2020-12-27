@@ -38,7 +38,7 @@ This cloned repository has the directories by default set up, however the import
 
 1. MPEG7 folder (Default: "MPEG7/") - This folder should contain all the MPEG7 images in their original downloaded format. The dataset can be dowloaded from the following link: http://www.timeseriesclassification.com/description.php?Dataset=ShapesAll
 
-2. JSON input folder (Default: "Input_JSON/") - This will be the folder that contains the JSON files containing the parameters for all the images you wish to generate. The JSON files will be further explained in the next section.
+2. JSON input folder (Default: "Input_JSON/") - This will be the folder that contains the JSON files with the parameters for all the images you wish to generate. The JSON files will be further explained in the next section.
 
 3. Image/Metadata output folder - (Default: "Output_Images/") This will be the folder that the generated images along the the generated metatdata will be output to.
 
@@ -49,7 +49,7 @@ In the home folder of this project there is a "template.json" that is an example
 The following sections will be used to explain how to change the parameters used in a JSON file.
 
 1. `save_dir`
-    This is input will dictate where the generated image will be saved. This can be either an absolute or relative path. See two examples below. The first is the default.
+    This is input will direct where the generated image will be saved. This can be either an absolute or relative path. See two examples below. The first is the default.
     ```json
     "save_dir": "Image_Ouput/"
     ```
@@ -64,7 +64,7 @@ The following sections will be used to explain how to change the parameters used
     2. Another version of the image that makes the specified find image white named *"<save_name>-find.png"*
     3. A .json file that contains the input parameters and additional metadata named *"<save_name>.json"*
 
-3. `background` This section includes 3 inputs. The color, length, and height of the background image. A valid entry will be formatted as follows:
+3. `background` This section includes 3 inputs. The color, width, and height of the background image. A valid entry will be formatted as follows:
     ```json
     "background": {
         "color": "beige",
@@ -92,12 +92,12 @@ The following sections will be used to explain how to change the parameters used
     ```
     The uniform distribution has the paramters set as [Lower Bound, Upper Bound]
 
-5. `rotation` The rotation determines what angle of rotation a shape has from the original image. This parameter has the same inputs as the scale. See two examples below:
+5. `rotation` The rotation determines what angle of rotation, in degrees, a shape has from the original image. This parameter has the same inputs as the scale. See two examples below:
 
     ```json
     "rotation": {
             "dist": "U",
-            "params": [0, 365]
+            "params": [0, 360]
     }
     ```
     ```json
@@ -109,6 +109,51 @@ The following sections will be used to explain how to change the parameters used
 
 6. `color` The color input determines the color each shape will be generated as. There are 3 distributions available for this parameter. Uniform, triangular, and mode. Each will be explained below.
 
-    #### Triangular
-    
+    #### Uniform
+    Using the uniform distribution, each channel of red, green, blue, and alpha will be independently distributed using their own upper and lower bounds. See example below:
+    ```json
+    "color": {
+        "dist": "U",
+        "args": [
+            [10,255],
+            [10,255],
+            [10,255],
+            [140,170]
+        ]
+    }
+    ```
 
+    #### Triangular
+    This distribution is input very similar to the uniform one. Each channel is given the lower bounds, peak, and upper bounds. See example:
+    ```json
+    "color": {
+        "dist": "U",
+        "args": [
+            [50, 70, 90],
+            [200, 210, 255],
+            [0, 50, 60],
+            [140, 155, 170]
+        ]
+    }
+    ```
+
+    #### Mode
+    This is a distributed made to allow for specific colors to be chosen. The inputs are each a "mode" that could be randomly selected. This supports 1 or more mode inputs. See example that will generate shapes that are all the same color:
+    ```json
+    "color": {
+        "dist": "M",
+        "args": [
+            [160, 195, 93, 155]
+        ]
+    }
+    ```
+    Below is code that will generate images with 2 colors:
+    ```json
+    "color": {
+        "dist": "M",
+        "args": [
+            [160, 195, 93, 155],
+            [30, 150, 38, 140]
+        ]
+    }
+    ```
