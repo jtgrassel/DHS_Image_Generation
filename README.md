@@ -157,3 +157,67 @@ The following sections will be used to explain how to change the parameters used
         ]
     }
     ```
+    This mode will likely be updated in the near future.
+
+7. `centers` The centers section are the input parameters for the poisson disc distribution that will make all the center points for the shapes.
+
+    The "r" value is the minimum pixels between the center points generated. 
+
+    The "k" value is how many times the program will try to generate a new point before giving up. The value 32 seems to be a good number to ensure there are no large blank spaces, but not be too inefficient.
+
+    To learn more about the poisson disc distribution, and the code used in this program visit the following website: https://scipython.com/blog/poisson-disc-sampling-in-python/
+
+    ```json
+    "centers": {
+        "r": 150,
+        "k": 32
+    }
+    ```
+
+8. `find_images` This section sets the shapes that will be required to be placed when the image is generated. The inputs required are the name of the MPEG7 shape, and the depth. The depth will determine when the shape is placed. Depth can be a value from 0 to 1. For example, if 1000 shapes are going to be placed and the depth is set to 0.2, the specified image will be placed as the 200th image. See example below:
+    ```json
+    "find_images": [
+        {"name": "bat-1.gif", "depth": 0.4}
+    ],
+    ```
+    The find images can also be left empty:
+    ```json
+    "find_images": [
+    ],
+    ```
+    More than one image can be included as well:
+    ```json
+    "find_images": [
+        {"name": "bat-1.gif", "depth": 0.40},
+        {"name": "bat-1.gif", "depth": 0.41},
+        {"name": "bat-3.gif", "depth": 0.42},
+        {"name": "butterfly-1.gif", "depth": 0.43}
+    ],
+    ```
+    When there are multiple find images all will be shown in the produced "<save_name>-find.png" image.
+
+9. `excluded_images` This section will stop these specified shapes from being randomly selected. This does not apply to the "find_images" section. The following example is used to remove all the bats, so that no bats will be confused for the bat that is being searched for.
+    ```json
+    "excluded_images": [
+        {"name": "bat-1.gif"},
+        {"name": "bat-2.gif"},
+        {"name": "bat-3.gif"},
+        {"name": "bat-4.gif"},
+        {"name": "bat-5.gif"},
+        {"name": "bat-6.gif"},
+        {"name": "bat-7.gif"},
+        {"name": "bat-8.gif"},
+        {"name": "bat-9.gif"},
+        {"name": "bat-10.gif"},
+        {"name": "bat-11.gif"},
+        {"name": "bat-12.gif"},
+        {"name": "bat-13.gif"},
+        {"name": "bat-14.gif"},
+        {"name": "bat-15.gif"},
+        {"name": "bat-16.gif"},
+        {"name": "bat-17.gif"},
+        {"name": "bat-18.gif"},
+        {"name": "bat-19.gif"},
+        {"name": "bat-20.gif"}
+    ]
+    ```
