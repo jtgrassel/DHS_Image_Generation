@@ -221,3 +221,12 @@ The following sections will be used to explain how to change the parameters used
         {"name": "bat-20.gif"}
     ]
     ```
+### IV. Running the "json_image_gen.py" code
+To finally generate one or more images you will need to run the code called "json_image_gen.py". This code cycles through all the .json files in the JSON input folder (Default "Input_JSON/") and generates images using those parameters and outputs to the output folder (Default "Output_Images/"). Both of these, as well as the MPEG7 directories can be changed from the "json_image_gen.py" code. 
+
+To quickly try generating a new image, copy and paste the "template.json" file from the home folder into the JSON input folder and run the "json_image_gen.py" code. After completion, you will find two images and an additional .json file in the "Output_Images" folder. 
+
+Some things to note:
+1. A newly generated file (.png or .json) that has the same name as another file in the output folder will be overwritten with no warning. 
+2. Since the random sampling is done during the execution of this code, you can rerun the same code with the same .json files and it will output new images. This is helpful when by chance the image that you are looking for is placed so close to the edge that it is not possible to find.
+3. The JSON input folder can contain as many .json files as you want. The code will simplye cycle through them all. The code will print out a status as the images are generated to track progress. Images with especially low "r" values, or especially large background sizes will take long to generate. 

@@ -13,7 +13,7 @@
         },
         "rotation": {
             "dist": "U",
-            "params": [0, 365]
+            "params": [0, 360]
         },
         "color": {
             "dist": "U",
@@ -30,70 +30,28 @@
         }
     },
     "find_images": [
-        {
-            "name": "bat-1.gif", "depth": 0.4
-        }
+        {"name": "bat-1.gif", "depth": 0.4}
     ],
     "excluded_images": [
-        {
-            "name": "bat-1.gif"
-        },
-        {
-            "name": "bat-2.gif"
-        },
-        {
-            "name": "bat-3.gif"
-        },
-        {
-            "name": "bat-4.gif"
-        },
-        {
-            "name": "bat-5.gif"
-        },
-        {
-            "name": "bat-6.gif"
-        },
-        {
-            "name": "bat-7.gif"
-        },
-        {
-            "name": "bat-8.gif"
-        },
-        {
-            "name": "bat-9.gif"
-        },
-        {
-            "name": "bat-10.gif"
-        },
-        {
-            "name": "bat-11.gif"
-        },
-        {
-            "name": "bat-12.gif"
-        },
-        {
-            "name": "bat-13.gif"
-        },
-        {
-            "name": "bat-14.gif"
-        },
-        {
-            "name": "bat-15.gif"
-        },
-        {
-            "name": "bat-16.gif"
-        },
-        {
-            "name": "bat-17.gif"
-        },
-        {
-            "name": "bat-18.gif"
-        },
-        {
-            "name": "bat-19.gif"
-        },
-        {
-            "name": "bat-20.gif"
-        }
+        {"name": "bat-1.gif"},
+        {"name": "bat-2.gif"},
+        {"name": "bat-3.gif"},
+        {"name": "bat-4.gif"},
+        {"name": "bat-5.gif"},
+        {"name": "bat-6.gif"},
+        {"name": "bat-7.gif"},
+        {"name": "bat-8.gif"},
+        {"name": "bat-9.gif"},
+        {"name": "bat-10.gif"},
+        {"name": "bat-11.gif"},
+        {"name": "bat-12.gif"},
+        {"name": "bat-13.gif"},
+        {"name": "bat-14.gif"},
+        {"name": "bat-15.gif"},
+        {"name": "bat-16.gif"},
+        {"name": "bat-17.gif"},
+        {"name": "bat-18.gif"},
+        {"name": "bat-19.gif"},
+        {"name": "bat-20.gif"}
     ]
 }
