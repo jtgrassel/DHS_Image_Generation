@@ -127,7 +127,7 @@ The following sections will be used to explain how to change the parameters used
     This distribution is input very similar to the uniform one. Each channel is given the lower bounds, peak, and upper bounds. See example:
     ```json
     "color": {
-        "dist": "U",
+        "dist": "T",
         "args": [
             [50, 70, 90],
             [200, 210, 255],
