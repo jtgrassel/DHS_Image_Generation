@@ -22,10 +22,10 @@ def getKeysByValue(dictOfElements, valueToFind, index):
 def colorRandomizer(dist, args):
     if dist == "U":
         newColor = (
+            int(round(random.uniform(args[0][0], args[0][1]))),
             int(round(random.uniform(args[1][0], args[1][1]))),
             int(round(random.uniform(args[2][0], args[2][1]))),
-            int(round(random.uniform(args[3][0], args[3][1]))),
-            int(round(random.uniform(args[4][0], args[4][1])))
+            int(round(random.uniform(args[3][0], args[3][1])))
         )
     if dist == "T":
         newColor = (
@@ -52,9 +52,7 @@ def genRandomizer(dist, params):
         rand_num = random.triangular(params[0], params[1], params[2])
     return rand_num
 
-def imageGen(json_dir):
-
-    mpeg7_dir = "C:/Users/Joshua/Documents/DHS Project/MPEG7dataset/original/"
+def imageGen(json_dir, mpeg7_dir):
 
     with open(json_dir) as f:
         json_data = json.load(f)
