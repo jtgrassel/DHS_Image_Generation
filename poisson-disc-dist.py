@@ -1,5 +1,5 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Choose up to k points around each reference point as candidates for a new
 # sample point
@@ -11,7 +11,7 @@ r = 500
 width, height = 1920, 1080
 
 # Cell side length
-a = r/np.sqrt(2)
+a = r / np.sqrt(2)
 # Number of cells in the x- and y-directions of the grid
 nx, ny = int(width / a) + 1, int(height / a) + 1
 
@@ -22,10 +22,12 @@ coords_list = [(ix, iy) for ix in range(nx) for iy in range(ny)]
 # samples list (or None if the cell is empty).
 cells = {coords: None for coords in coords_list}
 
+
 def get_cell_coords(pt):
     """Get the coordinates of the cell that pt = (x,y) falls in."""
 
     return int(pt[0] // a), int(pt[1] // a)
+
 
 def get_neighbours(coords):
     """Return the indexes of points in cells neighbouring cell at coords.
@@ -42,9 +44,9 @@ def get_neighbours(coords):
 
     """
 
-    dxdy = [(-1,-2),(0,-2),(1,-2),(-2,-1),(-1,-1),(0,-1),(1,-1),(2,-1),
-            (-2,0),(-1,0),(1,0),(2,0),(-2,1),(-1,1),(0,1),(1,1),(2,1),
-            (-1,2),(0,2),(1,2),(0,0)]
+    dxdy = [(-1, -2), (0, -2), (1, -2), (-2, -1), (-1, -1), (0, -1), (1, -1), (2, -1),
+            (-2, 0), (-1, 0), (1, 0), (2, 0), (-2, 1), (-1, 1), (0, 1), (1, 1), (2, 1),
+            (-1, 2), (0, 2), (1, 2), (0, 0)]
     neighbours = []
     for dx, dy in dxdy:
         neighbour_coords = coords[0] + dx, coords[1] + dy
@@ -58,6 +60,7 @@ def get_neighbours(coords):
             neighbours.append(neighbour_cell)
     return neighbours
 
+
 def point_valid(pt):
     """Is pt a valid point to emit as a sample?
 
@@ -70,12 +73,13 @@ def point_valid(pt):
     for idx in get_neighbours(cell_coords):
         nearby_pt = samples[idx]
         # Squared distance between or candidate point, pt, and this nearby_pt.
-        distance2 = (nearby_pt[0]-pt[0])**2 + (nearby_pt[1]-pt[1])**2
-        if distance2 < r**2:
+        distance2 = (nearby_pt[0] - pt[0]) ** 2 + (nearby_pt[1] - pt[1]) ** 2
+        if distance2 < r ** 2:
             # The points are too close, so pt is not a candidate.
             return False
     # All points tested: if we're here, pt is valid
     return True
+
 
 def get_point(k, refpt):
     """Try to find a candidate point relative to refpt to emit in the sample.
@@ -88,8 +92,8 @@ def get_point(k, refpt):
     """
     i = 0
     while i < k:
-        rho, theta = np.random.uniform(r, 2*r), np.random.uniform(0, 2*np.pi)
-        pt = refpt[0] + rho*np.cos(theta), refpt[1] + rho*np.sin(theta)
+        rho, theta = np.random.uniform(r, 2 * r), np.random.uniform(0, 2 * np.pi)
+        pt = refpt[0] + rho * np.cos(theta), refpt[1] + rho * np.sin(theta)
         if not (0 <= pt[0] < width and 0 <= pt[1] < height):
             # This point falls outside the domain, so try again.
             continue
@@ -98,6 +102,7 @@ def get_point(k, refpt):
         i += 1
     # We failed to find a suitable point in the vicinity of refpt.
     return False
+
 
 # Pick a random point to start with.
 pt = (np.random.uniform(0, width), np.random.uniform(0, height))
@@ -120,7 +125,7 @@ while active:
         # Point pt is valid: add it to the samples list and mark it as active
         samples.append(pt)
         nsamples += 1
-        active.append(len(samples)-1)
+        active.append(len(samples) - 1)
         cells[get_cell_coords(pt)] = len(samples) - 1
     else:
         # We had to give up looking for valid points near refpt, so remove it
