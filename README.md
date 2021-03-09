@@ -9,7 +9,7 @@ To generate an image using this code 4 steps are required:
 
 
 ### I. Environment setup
-Run `bash setup.sh` to setup the virtual environment, install the python dependencies and download MPEG7 the dataset.
+Run `bash setup.sh` to setup the virtual environment, install the python dependencies and download MPEG7 dataset.
 
 
 ### II. Making a json image parameters file
