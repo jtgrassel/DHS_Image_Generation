@@ -1,23 +1,27 @@
-from PIL import Image
+import json
+import random
 from os import listdir
 from os.path import isfile, join
-import math
-import random
-from poisson_disc_fun import poissonDisc
-from image_funs import advPaste
-import json
 
-def allFiles(path): #Gets a list of all the files in a folder
+from PIL import Image
+
+from image_funs import advPaste
+from poisson_disc_fun import poissonDisc
+
+
+def allFiles(path):  # Gets a list of all the files in a folder
     files = [f for f in listdir(path) if isfile(join(path, f))]
     return files
+
 
 def getKeysByValue(dictOfElements, valueToFind, index):
     listOfKeys = list()
     listOfItems = dictOfElements.items()
-    for item  in listOfItems:
+    for item in listOfItems:
         if item[index] == valueToFind:
             listOfKeys.append(item[0])
-    return  listOfKeys
+    return listOfKeys
+
 
 def colorRandomizer(dist, red, green, blue, alpha):
     if dist == "U":
@@ -36,12 +40,14 @@ def colorRandomizer(dist, red, green, blue, alpha):
         )
     return newColor
 
+
 def genRandomizer(dist, params):
     if dist == "U":
         rand_num = random.uniform(params[0], params[1])
     elif dist == "T":
         rand_num = random.triangular(params[0], params[1], params[2])
     return rand_num
+
 
 JSON_dir = "JSON_Files"
 JSON_file_list = allFiles(JSON_dir)
@@ -118,32 +124,34 @@ save_name = json_data['save_name']
 
 fileList = allFiles("MPEG7dataset/original")
 
-#remove excluded images
+# remove excluded images
 for item in excluded_images:
     fileList.remove(item["name"])
 
-#make an empty dictionary to keep track of the images
+# make an empty dictionary to keep track of the images
 imageDic = {}
 
-#make the background
-composite = Image.new('RGBA', (params["background"]["width"], params["background"]["height"]), color=params["background"]["color"])
+# make the background
+composite = Image.new('RGBA', (params["background"]["width"], params["background"]["height"]),
+                      color=params["background"]["color"])
 
-#pre-generate all the image center points
-centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"], params["centers"]["k"])
+# pre-generate all the image center points
+centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"],
+                           params["centers"]["k"])
 
-#palce all the random images
+# palce all the random images
 num = 0
 for newCenter in centerPoints:
     new_entry = {
         num: {
-            "imageDir":fileList[random.randint(0, len(fileList)-1)],
-            #"imageDir":"device3-1.gif",
-            "center":newCenter,
-            "scale":genRandomizer(params["scale"]["dist"], params["scale"]["params"]),
-            "rotation":genRandomizer(params["rotation"]["dist"], params["rotation"]["params"]),
-            "color":colorRandomizer(
-                params["color"]["dist"], 
-                params["color"]["channels"]["red"], 
+            "imageDir": fileList[random.randint(0, len(fileList) - 1)],
+            # "imageDir":"device3-1.gif",
+            "center": newCenter,
+            "scale": genRandomizer(params["scale"]["dist"], params["scale"]["params"]),
+            "rotation": genRandomizer(params["rotation"]["dist"], params["rotation"]["params"]),
+            "color": colorRandomizer(
+                params["color"]["dist"],
+                params["color"]["channels"]["red"],
                 params["color"]["channels"]["green"],
                 params["color"]["channels"]["blue"],
                 params["color"]["channels"]["alpha"]
@@ -153,15 +161,14 @@ for newCenter in centerPoints:
     imageDic.update(new_entry)
     num += 1
 
-#update the find images
+# update the find images
 findIndices = []
 for item in find_images:
-    imageNum = int(round((1-item["depth"])*len(centerPoints), 0))
+    imageNum = int(round((1 - item["depth"]) * len(centerPoints), 0))
     imageDic[imageNum]["imageDir"] = item["name"]
     findIndices.append(imageNum)
 
-
-#start pasting images
+# start pasting images
 for key in imageDic:
     newImageDir = imageDic[key]["imageDir"]
     newImage = Image.open(mpeg7_dir + newImageDir)
@@ -174,10 +181,10 @@ for key in imageDic:
         imageDic[key]["color"]
     )
 
-#save the final image
+# save the final image
 composite.save(save_dir + save_name + ".png", 'PNG')
 
-#make the easy find image
+# make the easy find image
 for i in findIndices:
     findImageDir = imageDic[i]["imageDir"]
     newImage = Image.open(mpeg7_dir + findImageDir)
@@ -190,15 +197,15 @@ for i in findIndices:
         (255, 255, 255, 255)
     )
 
-#save the easy find image
+# save the easy find image
 composite.save(save_dir + save_name + "-find.png", 'PNG')
 
-#make json file
+# make json file
 json_dic = {
-    "params":params,
-    "find_images":find_images,
-    "excluded_images":excluded_images,
-    "results":imageDic
+    "params": params,
+    "find_images": find_images,
+    "excluded_images": excluded_images,
+    "results": imageDic
 }
 
 with open(save_dir + save_name + ".txt", 'w') as json_file:

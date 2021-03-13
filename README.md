@@ -3,46 +3,16 @@
 # Generating an Image
 To generate an image using this code 4 steps are required:
 
-    I. Python libraries
-    II. Directories
-    III. Making a json image parameters file
-    IV. Running the "json_image_gen.py" code
+    I. Seting up the environment
+    II. Making a json image parameters file
+    III. Running the "json_image_gen.py" code
 
 
-### I. Python libraries
-The only library that should require installation outside of the default python packages is the Pillow library (a fork of PIL). This library is used to do most of the image processing. Use the following commands to install this library:
+### I. Environment setup
+Run `bash setup.sh` to setup the virtual environment, install the python dependencies and download MPEG7 dataset.
 
-For installing:
-```python
-pip install pip
-pip install Pillow
-```
 
-For upgrading if previously installed:
-```python
-pip install --upgrade pip
-pip install --upgrade Pillow
-```
-The other libraries required are listed below:
-```python
-os
-math
-random
-json
-```
-
-### II. Directories
-This cloned repository has the directories by default set up, however the important ones are explained here. The default folders are all subfolders of the folder containing the code.
-
-3 Directories are required.
-
-1. MPEG7 folder (Default: "MPEG7/") - This folder should contain all the MPEG7 images in their original downloaded format. The dataset can be dowloaded from the following link: http://www.timeseriesclassification.com/description.php?Dataset=ShapesAll
-
-2. JSON input folder (Default: "Input_JSON/") - This will be the folder that contains the JSON files with the parameters for all the images you wish to generate. The JSON files will be further explained in the next section.
-
-3. Image/Metadata output folder - (Default: "Output_Images/") This will be the folder that the generated images along the generated metadata will be output to.
-
-### III. Making a json image parameters file
+### II. Making a json image parameters file
 The code generates an image based on the parameters set in the JSON files.
 In the home folder of this project there is a "template.json" that is an example of a working set of parameters used to generate an image.
 
@@ -222,7 +192,14 @@ The following sections will be used to explain how to change the parameters used
     ]
     ```
 ### IV. Running the "json_image_gen.py" code
-To finally generate one or more images you will need to run the code called "json_image_gen.py". This code cycles through all the .json files in the JSON input folder (Default "Input_JSON/") and generates images using those parameters and outputs to the output folder (Default "Output_Images/"). Both of these directories, as well as the MPEG7 directories can be changed from the "json_image_gen.py" code. 
+To finally generate one or more images, run
+
+```bash
+source .venv/bin/activate
+python json_image_gen.py
+``` 
+
+The python script cycles through all the .json files in the JSON input folder (Default "Input_JSON/") and generates images using those parameters and outputs to the output folder (Default "Output_Images/"). Both of these directories, as well as the MPEG7 directories can be changed from the "json_image_gen.py" code. 
 
 To quickly try generating a new image, copy and paste the "template.json" file from the home folder into the JSON input folder and run the "json_image_gen.py" code. After completion, you will find two images and an additional .json file in the "Output_Images" folder. 
 

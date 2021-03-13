@@ -1,23 +1,27 @@
-from PIL import Image
+import json
+import random
 from os import listdir
 from os.path import isfile, join
-import math
-import random
-from poisson_disc_fun import poissonDisc
-from image_funs import advPaste
-import json
 
-def allFiles(path): #Gets a list of all the files in a folder
+from PIL import Image
+
+from image_funs import advPaste
+from poisson_disc_fun import poissonDisc
+
+
+def allFiles(path):  # Gets a list of all the files in a folder
     files = [f for f in listdir(path) if isfile(join(path, f))]
     return files
+
 
 def getKeysByValue(dictOfElements, valueToFind, index):
     listOfKeys = list()
     listOfItems = dictOfElements.items()
-    for item  in listOfItems:
+    for item in listOfItems:
         if item[index] == valueToFind:
             listOfKeys.append(item[0])
-    return  listOfKeys
+    return listOfKeys
+
 
 def colorRandomizer(dist, args):
     if dist == "U":
@@ -36,14 +40,15 @@ def colorRandomizer(dist, args):
         )
     if dist == "M":
         increments = 1
-        newIndex = random.randint(0, len(args)-2)
+        newIndex = random.randint(0, len(args) - 2)
         newIncrement = random.randint(0, increments)
-        newRed = ((args[newIndex + 1][0] - args[newIndex][0])/(increments+1))*newIncrement + args[newIndex][0]
-        newGreen = ((args[newIndex + 1][1] - args[newIndex][1])/(increments+1))*newIncrement + args[newIndex][1]
-        newBlue = ((args[newIndex + 1][2] - args[newIndex][2])/(increments+1))*newIncrement + args[newIndex][2]
-        newAlpha = ((args[newIndex + 1][3] - args[newIndex][3])/(increments+1))*newIncrement + args[newIndex][3]
+        newRed = ((args[newIndex + 1][0] - args[newIndex][0]) / (increments + 1)) * newIncrement + args[newIndex][0]
+        newGreen = ((args[newIndex + 1][1] - args[newIndex][1]) / (increments + 1)) * newIncrement + args[newIndex][1]
+        newBlue = ((args[newIndex + 1][2] - args[newIndex][2]) / (increments + 1)) * newIncrement + args[newIndex][2]
+        newAlpha = ((args[newIndex + 1][3] - args[newIndex][3]) / (increments + 1)) * newIncrement + args[newIndex][3]
         newColor = (int(round(newRed)), int(round(newGreen)), int(round(newBlue)), int(round(newAlpha)))
     return newColor
+
 
 def genRandomizer(dist, params):
     if dist == "U":
@@ -52,8 +57,8 @@ def genRandomizer(dist, params):
         rand_num = random.triangular(params[0], params[1], params[2])
     return rand_num
 
-def imageGen(json_dir, mpeg7_dir):
 
+def imageGen(json_dir, mpeg7_dir):
     with open(json_dir) as f:
         json_data = json.load(f)
 
@@ -65,30 +70,32 @@ def imageGen(json_dir, mpeg7_dir):
 
     fileList = allFiles(mpeg7_dir)
 
-    #remove excluded images
+    # remove excluded images
     for item in excluded_images:
         fileList.remove(item["name"])
 
-    #make an empty dictionary to keep track of the images
+    # make an empty dictionary to keep track of the images
     imageDic = {}
 
-    #make the background
-    composite = Image.new('RGBA', (params["background"]["width"], params["background"]["height"]), color=params["background"]["color"])
+    # make the background
+    composite = Image.new('RGBA', (params["background"]["width"], params["background"]["height"]),
+                          color=params["background"]["color"])
 
-    #pre-generate all the image center points
-    centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"], params["centers"]["k"])
+    # pre-generate all the image center points
+    centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"],
+                               params["centers"]["k"])
 
-    #palce all the random images
+    # palce all the random images
     num = 0
     for newCenter in centerPoints:
         new_entry = {
             num: {
-                "imageDir":fileList[random.randint(0, len(fileList)-1)],
-                "center":newCenter,
-                "scale":genRandomizer(params["scale"]["dist"], params["scale"]["params"]),
-                "rotation":genRandomizer(params["rotation"]["dist"], params["rotation"]["params"]),
-                "color":colorRandomizer(
-                    params["color"]["dist"], 
+                "imageDir": fileList[random.randint(0, len(fileList) - 1)],
+                "center": newCenter,
+                "scale": genRandomizer(params["scale"]["dist"], params["scale"]["params"]),
+                "rotation": genRandomizer(params["rotation"]["dist"], params["rotation"]["params"]),
+                "color": colorRandomizer(
+                    params["color"]["dist"],
                     params["color"]["args"]
                 )
             }
@@ -96,14 +103,14 @@ def imageGen(json_dir, mpeg7_dir):
         imageDic.update(new_entry)
         num += 1
 
-    #update the find images
+    # update the find images
     findIndices = []
     for item in find_images:
-        imageNum = int(round((1-item["depth"])*len(centerPoints), 0))
+        imageNum = int(round((1 - item["depth"]) * len(centerPoints), 0))
         imageDic[imageNum]["imageDir"] = item["name"]
         findIndices.append(imageNum)
 
-    #start pasting images
+    # start pasting images
     for key in imageDic:
         newImageDir = imageDic[key]["imageDir"]
         newImage = Image.open(mpeg7_dir + newImageDir)
@@ -116,10 +123,10 @@ def imageGen(json_dir, mpeg7_dir):
             imageDic[key]["color"]
         )
 
-    #save the final image
+    # save the final image
     composite.save(save_dir + save_name + ".png", 'PNG')
 
-    #make the easy find image
+    # make the easy find image
     for i in findIndices:
         findImageDir = imageDic[i]["imageDir"]
         newImage = Image.open(mpeg7_dir + findImageDir)
@@ -132,17 +139,17 @@ def imageGen(json_dir, mpeg7_dir):
             (255, 255, 255, 255)
         )
 
-    #save the easy find image
+    # save the easy find image
     composite.save(save_dir + save_name + "-find.png", 'PNG')
 
-    #make json file
+    # make json file
     json_dic = {
-        "save_dir":save_dir,
-        "save_name":save_name,
-        "params":params,
-        "find_images":find_images,
-        "excluded_images":excluded_images,
-        "results":imageDic
+        "save_dir": save_dir,
+        "save_name": save_name,
+        "params": params,
+        "find_images": find_images,
+        "excluded_images": excluded_images,
+        "results": imageDic
     }
 
     with open(save_dir + save_name + ".json", 'w') as json_file:
