@@ -39,7 +39,7 @@ def colorRandomizer(dist, args):
             int(round(random.triangular(args[3][0], args[3][1], args[3][2])))
         )
     if dist == "M":
-        increments = 1
+        increments = 0
         newIndex = random.randint(0, len(args) - 2)
         newIncrement = random.randint(0, increments)
         newRed = ((args[newIndex + 1][0] - args[newIndex][0]) / (increments + 1)) * newIncrement + args[newIndex][0]
@@ -79,7 +79,10 @@ def imageGen(json_dir, mpeg7_dir):
 
     # make the background
     composite = Image.new('RGBA', (params["background"]["width"], params["background"]["height"]),
-                          color=params["background"]["color"])
+                          color=(params["background"]["color"][0],
+                                params["background"]["color"][1],
+                                params["background"]["color"][2],
+                                params["background"]["color"][3]))
 
     # pre-generate all the image center points
     centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"],
