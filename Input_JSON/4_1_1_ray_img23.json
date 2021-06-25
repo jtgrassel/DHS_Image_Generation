@@ -1,6 +1,6 @@
 {
     "save_dir": "Output_Images/",
-    "save_name": "4_1_1_img12",
+    "save_name": "4_1_1_ray_img23",
     "params": {
         "background": {
             "color": [
@@ -15,9 +15,9 @@
         "scale": {
             "dist": "T",
             "params": [
-                0.43,
                 0.53,
-                0.63
+                0.68,
+                0.83
             ]
         },
         "rotation": {
@@ -99,76 +99,76 @@
             ]
         },
         "centers": {
-            "r": 150,
+            "r": 140,
             "k": 32
         }
     },
     "find_images": [
         {
-            "name": "bat-5.gif",
+            "name": "ray-7.gif",
             "depth": 0.5
         }
     ],
     "excluded_images": [
         {
-            "name": "bat-1.gif"
+            "name": "ray-1.gif"
         },
         {
-            "name": "bat-2.gif"
+            "name": "ray-2.gif"
         },
         {
-            "name": "bat-3.gif"
+            "name": "ray-3.gif"
         },
         {
-            "name": "bat-4.gif"
+            "name": "ray-4.gif"
         },
         {
-            "name": "bat-5.gif"
+            "name": "ray-5.gif"
         },
         {
-            "name": "bat-6.gif"
+            "name": "ray-6.gif"
         },
         {
-            "name": "bat-7.gif"
+            "name": "ray-7.gif"
         },
         {
-            "name": "bat-8.gif"
+            "name": "ray-8.gif"
         },
         {
-            "name": "bat-9.gif"
+            "name": "ray-9.gif"
         },
         {
-            "name": "bat-10.gif"
+            "name": "ray-10.gif"
         },
         {
-            "name": "bat-11.gif"
+            "name": "ray-11.gif"
         },
         {
-            "name": "bat-12.gif"
+            "name": "ray-12.gif"
         },
         {
-            "name": "bat-13.gif"
+            "name": "ray-13.gif"
         },
         {
-            "name": "bat-14.gif"
+            "name": "ray-14.gif"
         },
         {
-            "name": "bat-15.gif"
+            "name": "ray-15.gif"
         },
         {
-            "name": "bat-16.gif"
+            "name": "ray-16.gif"
         },
         {
-            "name": "bat-17.gif"
+            "name": "ray-17.gif"
         },
         {
-            "name": "bat-18.gif"
+            "name": "ray-18.gif"
         },
         {
-            "name": "bat-19.gif"
+            "name": "ray-19.gif"
         },
         {
-            "name": "bat-20.gif"
+            "name": "ray-20.gif"
         }
     ]
 }
