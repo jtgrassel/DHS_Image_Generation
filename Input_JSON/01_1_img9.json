@@ -1,0 +1,174 @@
+{
+    "save_dir": "Output_Images/",
+    "save_name": "01_1_img9",
+    "params": {
+        "background": {
+            "color": [
+                230,
+                235,
+                209,
+                255
+            ],
+            "width": 1080,
+            "height": 1080
+        },
+        "scale": {
+            "dist": "T",
+            "params": [
+                0.4,
+                0.55,
+                0.7
+            ]
+        },
+        "rotation": {
+            "dist": "U",
+            "params": [
+                0,
+                365
+            ]
+        },
+        "color": {
+            "dist": "M",
+            "args": [
+                [
+                    31,
+                    28,
+                    28,
+                    200
+                ],
+                [
+                    20,
+                    92,
+                    163,
+                    200
+                ],
+                [
+                    20,
+                    92,
+                    163,
+                    150
+                ],
+                [
+                    20,
+                    92,
+                    163,
+                    100
+                ],
+                [
+                    89,
+                    135,
+                    28,
+                    200
+                ],
+                [
+                    89,
+                    135,
+                    28,
+                    150
+                ],
+                [
+                    89,
+                    135,
+                    28,
+                    100
+                ],
+                [
+                    196,
+                    130,
+                    23,
+                    200
+                ],
+                [
+                    196,
+                    130,
+                    23,
+                    150
+                ],
+                [
+                    196,
+                    130,
+                    23,
+                    100
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    255
+                ]
+            ]
+        },
+        "centers": {
+            "r": 100,
+            "k": 32
+        }
+    },
+    "find_images": [
+        {
+            "name": "ray-7.gif",
+            "depth": 0.5
+        }
+    ],
+    "excluded_images": [
+        {
+            "name": "ray-1.gif"
+        },
+        {
+            "name": "ray-2.gif"
+        },
+        {
+            "name": "ray-3.gif"
+        },
+        {
+            "name": "ray-4.gif"
+        },
+        {
+            "name": "ray-5.gif"
+        },
+        {
+            "name": "ray-6.gif"
+        },
+        {
+            "name": "ray-7.gif"
+        },
+        {
+            "name": "ray-8.gif"
+        },
+        {
+            "name": "ray-9.gif"
+        },
+        {
+            "name": "ray-10.gif"
+        },
+        {
+            "name": "ray-11.gif"
+        },
+        {
+            "name": "ray-12.gif"
+        },
+        {
+            "name": "ray-13.gif"
+        },
+        {
+            "name": "ray-14.gif"
+        },
+        {
+            "name": "ray-15.gif"
+        },
+        {
+            "name": "ray-16.gif"
+        },
+        {
+            "name": "ray-17.gif"
+        },
+        {
+            "name": "ray-18.gif"
+        },
+        {
+            "name": "ray-19.gif"
+        },
+        {
+            "name": "ray-20.gif"
+        }
+    ]
+}

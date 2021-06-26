@@ -1,6 +1,6 @@
 {
     "save_dir": "Output_Images/",
-    "save_name": "4_1_1_ray_img32",
+    "save_name": "01_1_img11",
     "params": {
         "background": {
             "color": [
@@ -15,9 +15,9 @@
         "scale": {
             "dist": "T",
             "params": [
-                0.66,
-                0.81,
-                0.96
+                0.4,
+                0.55,
+                0.7
             ]
         },
         "rotation": {
@@ -99,7 +99,7 @@
             ]
         },
         "centers": {
-            "r": 160,
+            "r": 140,
             "k": 32
         }
     },

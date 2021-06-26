@@ -2,7 +2,7 @@ import json
 
 json_dir = "Input_JSON/"
 img_dir = "Output_Images/"
-group_name = "4_1_0_ray"
+group_name = "01_1"
 
 backgroundA = [
     ((230,235,209,255), 1080, 1080)
@@ -10,13 +10,9 @@ backgroundA = [
 
 scaleA = [
     ("T", .10, .25, .4),
-    ("T", 0.23, 0.38, 0.51),
     ("T", 0.25, 0.40, 0.55),
-    ("T", 0.38, 0.53, 0.68),
     ("T", 0.40, 0.55, 0.70),
-    ("T", 0.53, 0.68, 0.83),
-    ("T", 0.55, 0.70, 0.85),
-    ("T", 0.66, 0.81, 0.96)
+    ("T", 0.55, 0.70, 0.85)
     ]
 
 rotationA = [("U", 0, 365)]
@@ -47,7 +43,7 @@ find_image_name = "ray"
 find_image_number = "-7"
 
 find_images = [
-    #{"name":find_image_name + find_image_number + ".gif", "depth":0.5},
+    {"name":find_image_name + find_image_number + ".gif", "depth":0.5},
 ]
 
 excluded_images = [

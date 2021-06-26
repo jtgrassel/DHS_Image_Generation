@@ -79,17 +79,35 @@ def imageGen(args, save_index):
     # make an empty dictionary to keep track of the images
     imageDic = {}
 
-    # make the background
-    composite = Image.new('RGBA', (params["background"]["width"], params["background"]["height"]),
-                          color=(params["background"]["color"][0],
-                                params["background"]["color"][1],
-                                params["background"]["color"][2],
-                                params["background"]["color"][3]))
-
     # pre-generate all the image center points
     centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"],
                                params["centers"]["k"])
 
+    #check for find image close to boundary
+    imageNum = int(round((1 - find_images[0]["depth"]) * len(centerPoints), 0))
+    safety_adj = params["background"]["width"]/30
+    x, y = centerPoints[imageNum]
+
+    if x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
+        print(f"Index: {save_index} XY: {x},{y}.Target object is out of boundary, no image was generated.")
+        # return
+    
+    # counter = 0
+    # while x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
+    #     centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"],
+    #                            params["centers"]["k"])
+
+    #     #check for find image close to boundary
+    #     imageNum = int(round((1 - find_images[0]["depth"]) * len(centerPoints), 0))
+    #     safety_adj = params["background"]["width"]/10
+    #     x, y = centerPoints[imageNum]
+    #     counter += 1
+    #     if counter > 100:
+    #         print("Target object is out of boundary, no image was generated.")
+    #         return
+         
+    
+    
     # palce all the random images
     num = 0
     for newCenter in centerPoints:
@@ -115,6 +133,13 @@ def imageGen(args, save_index):
         imageDic[imageNum]["imageDir"] = item["name"]
         findIndices.append(imageNum)
 
+    # make the background
+    composite = Image.new('RGBA', (params["background"]["width"], params["background"]["height"]),
+                          color=(params["background"]["color"][0],
+                                params["background"]["color"][1],
+                                params["background"]["color"][2],
+                                params["background"]["color"][3]))
+
     # start pasting images
     for key in imageDic:
         newImageDir = imageDic[key]["imageDir"]
@@ -129,9 +154,9 @@ def imageGen(args, save_index):
         )
 
     # save the final image
-    composite.save(f"{save_dir}/{save_index:05d}.png", 'PNG')
+    composite.save(f"{save_dir}/{save_index:05d}{save_name}.png", 'PNG')
 
-    # # make the easy find image
+    # make the easy find image
     # for i in findIndices:
     #     findImageDir = imageDic[i]["imageDir"]
     #     newImage = Image.open(mpeg7_dir + findImageDir)
@@ -144,8 +169,8 @@ def imageGen(args, save_index):
     #         (255, 255, 255, 255)
     #     )
 
-    # save the easy find image
-    # composite.save(save_dir + save_name + "-find.png", 'PNG')
+    #save the easy find image
+    # composite.save(save_dir + str(save_index) + "-find.png", 'PNG')
 
     # # make json file
     # json_dic = {
