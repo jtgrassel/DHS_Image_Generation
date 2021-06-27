@@ -59,6 +59,7 @@ def genRandomizer(dist, params):
 
 
 def imageGen(args, save_index):
+    random.seed()
     json_dir = args['json_dir']
     mpeg7_dir = args['mpeg7_dir']
     with open(json_dir) as f:
@@ -83,30 +84,15 @@ def imageGen(args, save_index):
     centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"],
                                params["centers"]["k"])
 
-    #check for find image close to boundary
-    imageNum = int(round((1 - find_images[0]["depth"]) * len(centerPoints), 0))
-    safety_adj = params["background"]["width"]/30
-    x, y = centerPoints[imageNum]
+    # check for find image close to boundary
+    if len(find_images) > 0:
+        imageNum = int(round((1 - find_images[0]["depth"]) * len(centerPoints), 0))
+        safety_adj = params["background"]["width"]/25
+        x, y = centerPoints[imageNum]
 
-    if x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
-        print(f"Index: {save_index} XY: {x},{y}.Target object is out of boundary, no image was generated.")
-        # return
-    
-    # counter = 0
-    # while x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
-    #     centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"],
-    #                            params["centers"]["k"])
-
-    #     #check for find image close to boundary
-    #     imageNum = int(round((1 - find_images[0]["depth"]) * len(centerPoints), 0))
-    #     safety_adj = params["background"]["width"]/10
-    #     x, y = centerPoints[imageNum]
-    #     counter += 1
-    #     if counter > 100:
-    #         print("Target object is out of boundary, no image was generated.")
-    #         return
-         
-    
+        if x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
+            print(f"Index: {save_index} XY: {x},{y}.Target object is out of boundary, no image was generated.")
+            # return
     
     # palce all the random images
     num = 0
@@ -154,7 +140,7 @@ def imageGen(args, save_index):
         )
 
     # save the final image
-    composite.save(f"{save_dir}/{save_index:05d}{save_name}.png", 'PNG')
+    composite.save(f"{save_dir}/{save_index:05d}_{save_name}.png", 'PNG')
 
     # make the easy find image
     # for i in findIndices:

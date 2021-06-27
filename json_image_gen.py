@@ -1,10 +1,10 @@
-from typing import Mapping
-from numpy.core.fromnumeric import repeat
+# from typing import Mapping
+# from numpy.core.fromnumeric import repeat
 from image_generator_fun import allFiles
 from image_generator_fun import imageGen
 import multiprocessing as mp
-from p_tqdm import p_map
-from functools import partial
+# from p_tqdm import p_map
+# from functools import partial
 from itertools import repeat
 
 if __name__ == '__main__':
@@ -19,7 +19,7 @@ if __name__ == '__main__':
     jsonFiles = allFiles(jsonDir)  # Gets all the JSON files in the provided folder
 
     # Generates an number of images for each JSON file provided
-    image_count = 5
+    image_count = 750
     for jsonFile in jsonFiles:
         args = {
             'json_dir': jsonDir + jsonFile,
