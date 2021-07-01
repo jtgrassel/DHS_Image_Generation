@@ -38,15 +38,21 @@ def colorRandomizer(dist, args):
             int(round(random.triangular(args[2][0], args[2][1], args[2][2]))),
             int(round(random.triangular(args[3][0], args[3][1], args[3][2])))
         )
+
+    # if dist == "M":
+    #     increments = 0
+    #     newIndex = random.randint(0, len(args) - 2)
+    #     newIncrement = random.randint(0, increments)
+    #     newRed = ((args[newIndex + 1][0] - args[newIndex][0]) / (increments + 1)) * newIncrement + args[newIndex][0]
+    #     newGreen = ((args[newIndex + 1][1] - args[newIndex][1]) / (increments + 1)) * newIncrement + args[newIndex][1]
+    #     newBlue = ((args[newIndex + 1][2] - args[newIndex][2]) / (increments + 1)) * newIncrement + args[newIndex][2]
+    #     newAlpha = ((args[newIndex + 1][3] - args[newIndex][3]) / (increments + 1)) * newIncrement + args[newIndex][3]
+    #     newColor = (int(round(newRed)), int(round(newGreen)), int(round(newBlue)), int(round(newAlpha)))
+
     if dist == "M":
-        increments = 0
-        newIndex = random.randint(0, len(args) - 2)
-        newIncrement = random.randint(0, increments)
-        newRed = ((args[newIndex + 1][0] - args[newIndex][0]) / (increments + 1)) * newIncrement + args[newIndex][0]
-        newGreen = ((args[newIndex + 1][1] - args[newIndex][1]) / (increments + 1)) * newIncrement + args[newIndex][1]
-        newBlue = ((args[newIndex + 1][2] - args[newIndex][2]) / (increments + 1)) * newIncrement + args[newIndex][2]
-        newAlpha = ((args[newIndex + 1][3] - args[newIndex][3]) / (increments + 1)) * newIncrement + args[newIndex][3]
-        newColor = (int(round(newRed)), int(round(newGreen)), int(round(newBlue)), int(round(newAlpha)))
+        newIndex = random.randint(0, len(args) - 1)
+        newColor = (args[newIndex][0], args[newIndex][1], args[newIndex][2], args[newIndex][3])
+
     return newColor
 
 
@@ -87,7 +93,7 @@ def imageGen(args, save_index):
     # check for find image close to boundary
     if len(find_images) > 0:
         imageNum = int(round((1 - find_images[0]["depth"]) * len(centerPoints), 0))
-        safety_adj = params["background"]["width"]/25
+        safety_adj = params["background"]["width"]/20
         x, y = centerPoints[imageNum]
 
         if x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
@@ -134,7 +140,7 @@ def imageGen(args, save_index):
             newImage,
             composite,
             imageDic[key]["center"],
-            imageDic[key]["scale"],
+            imageDic[key]["scale"]*1.4,
             imageDic[key]["rotation"],
             imageDic[key]["color"]
         )
