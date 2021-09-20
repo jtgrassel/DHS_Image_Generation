@@ -32,9 +32,3 @@ if __name__ == '__main__':
     
     print("Complete")
 
-    # for jsonFile in jsonFiles:
-    #     imageGen(jsonDir + jsonFile, mpeg7Dir, save_index)
-    #     count += 1
-    #     status = round(count * progressMult, 2)
-    #     print("Status:" + str(status))
-
