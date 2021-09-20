@@ -39,16 +39,6 @@ def colorRandomizer(dist, args):
             int(round(random.triangular(args[3][0], args[3][1], args[3][2])))
         )
 
-    # if dist == "M":
-    #     increments = 0
-    #     newIndex = random.randint(0, len(args) - 2)
-    #     newIncrement = random.randint(0, increments)
-    #     newRed = ((args[newIndex + 1][0] - args[newIndex][0]) / (increments + 1)) * newIncrement + args[newIndex][0]
-    #     newGreen = ((args[newIndex + 1][1] - args[newIndex][1]) / (increments + 1)) * newIncrement + args[newIndex][1]
-    #     newBlue = ((args[newIndex + 1][2] - args[newIndex][2]) / (increments + 1)) * newIncrement + args[newIndex][2]
-    #     newAlpha = ((args[newIndex + 1][3] - args[newIndex][3]) / (increments + 1)) * newIncrement + args[newIndex][3]
-    #     newColor = (int(round(newRed)), int(round(newGreen)), int(round(newBlue)), int(round(newAlpha)))
-
     if dist == "M":
         newIndex = random.randint(0, len(args) - 1)
         newColor = (args[newIndex][0], args[newIndex][1], args[newIndex][2], args[newIndex][3])
@@ -147,32 +137,3 @@ def imageGen(args, save_index):
 
     # save the final image
     composite.save(f"{save_dir}/{save_index:05d}_{save_name}.png", 'PNG')
-
-    # make the easy find image
-    # for i in findIndices:
-    #     findImageDir = imageDic[i]["imageDir"]
-    #     newImage = Image.open(mpeg7_dir + findImageDir)
-    #     composite = advPaste(
-    #         newImage,
-    #         composite,
-    #         imageDic[i]["center"],
-    #         imageDic[i]["scale"],
-    #         imageDic[i]["rotation"],
-    #         (255, 255, 255, 255)
-    #     )
-
-    #save the easy find image
-    # composite.save(save_dir + str(save_index) + "-find.png", 'PNG')
-
-    # # make json file
-    # json_dic = {
-    #     "save_dir": save_dir,
-    #     "save_name": save_name,
-    #     "params": params,
-    #     "find_images": find_images,
-    #     "excluded_images": excluded_images,
-    #     "results": imageDic
-    # }
-
-    # with open(save_dir + save_name + ".json", 'w') as json_file:
-    #     json.dump(json_dic, json_file, indent=4)
