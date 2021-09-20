@@ -54,8 +54,7 @@ def closeCrop(img):  # Crops to the closest white pixels (Non-functioning)
     return img
 
 
-def squareCrop(
-        img):  # Crops to the closes white pixels in the wider dimension, evenly crops the shorter dimensio to make the final result a square (Non functioning)
+def squareCrop(img):  # Crops to the closes white pixels in the wider dimension, evenly crops the shorter dimensio to make the final result a square (Non functioning)
     img = img.convert('RGBA')
     datas = img.getdata()
     dim = img.size
@@ -80,8 +79,7 @@ def squareCrop(
     cropDim = [cropBox[2] - cropBox[0], cropBox[3] - cropBox[1]]
 
     if cropDim[0] > cropDim[1]:  # Adjusts for squareness
-        adjU = int((cropDim[0] - cropDim[1]) / 2) + ((cropDim[0] - cropDim[
-            1]) % 2 > 0)  # Rounds up to make sure a half pixel will get shifted to one side
+        adjU = int((cropDim[0] - cropDim[1]) / 2) + ((cropDim[0] - cropDim[1]) % 2 > 0)  # Rounds up to make sure a half pixel will get shifted to one side
         adjD = int((cropDim[0] - cropDim[1]) / 2)  # Rounds down
         cropBox[1] = cropBox[1] - adjU
         cropBox[3] = cropBox[3] + adjD
@@ -91,16 +89,21 @@ def squareCrop(
         cropBox[0] = cropBox[0] - adjU
         cropBox[2] = cropBox[2] + adjD
 
+    #add padding
+    padding = max(cropDim)*0.2
+    cropBox[0] = cropBox[0] - padding
+    cropBox[1] = cropBox[1] - padding
+    cropBox[2] = cropBox[2] + padding
+    cropBox[3] = cropBox[3] + padding
+    
     img = img.crop(cropBox)
     return img
-
 
 def compPaste(img, base, box):  # Takes in an image, a background, and pastes with transparency proprely
     temp = Image.new('RGBA', base.size, (255, 255, 255, 0))
     temp.paste(img, box)
     composite = Image.alpha_composite(base, temp)
     return composite
-
 
 def advPaste(img, background, centerPos, scale, rotation, color):
     img = squareCrop(img)
@@ -116,3 +119,11 @@ def advPaste(img, background, centerPos, scale, rotation, color):
 
     comp = compPaste(img, background, pastePos)
     return comp
+
+#### FUNCTION TESTING ####
+# composite = Image.new('RGBA', (1080, 1080), color=(255,255,255,255))
+# newImage = Image.open('MPEG7/device3-11.gif')
+
+# composite = advPaste(newImage, composite, (500,500), 0.2, 45, (255,0,0,255))
+
+# composite.show()

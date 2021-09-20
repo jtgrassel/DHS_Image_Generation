@@ -1,33 +1,49 @@
 import json
 
-json_dir = "C:/Users/Joshua/Documents/DHS Project/JSON_Files/"
-img_dir = "C:/Users/Joshua/Documents/DHS Project/temp/"
-group_name = "ColorMode_No_Bat"
+json_dir = "Input_JSON/"
+img_dir = "Output_Images/"
+group_name = "01_1"
 
 backgroundA = [
-    ("beige", 1080, 1080)
+    ((230,235,209,255), 1080, 1080)
 ]
 
-scaleA = [("T", .15, .2, .25), ("T", 0.25, 0.3, 0.35)]
+scaleA = [
+    ("T", .10, .25, .4),
+    ("T", 0.25, 0.40, 0.55),
+    ("T", 0.40, 0.55, 0.70),
+    ("T", 0.55, 0.70, 0.85)
+    ]
 
 rotationA = [("U", 0, 365)]
 
 colorA = [
-    ("M", ((160, 195, 93, 155), (50, 54, 146, 155))),
-    ("M", ((24, 51, 221, 155), (24, 195, 247, 155))),
-    ("M", ((60, 40, 50, 155), (60, 211, 246, 155), (93, 255, 230, 155))),
-    ("M", ((165, 235, 169, 155), (240, 191, 183, 155), (62, 56, 137, 155))),
-    ("M", ((161, 34, 94, 155), (28, 144, 131, 155), (209, 181, 78, 155), (18, 199, 76, 155))),
-    ("M", ((277, 190, 7, 155), (120, 100, 255, 155), (151, 193, 108, 155), (52, 47, 204, 155)))
+("M",(
+(31,28,28,200),
+(20,92,163,200),
+(20,92,163,150),
+(20,92,163,100),
+(89,135,28,200),
+(89,135,28,150),
+(89,135,28,100),
+(196,130,23,200),
+(196,130,23,150),
+(196,130,23,100),
+(0,0,0,255)))
 ]
 
-centersA = [(80, 32)]
+centersA = [
+    (100, 32),
+    (120, 32),
+    (140, 32),
+    (160, 32)
+    ]
 
-find_image_name = "bat"
-find_image_number = "-5"
+find_image_name = "ray"
+find_image_number = "-7"
 
 find_images = [
-    # {"name":find_image_name + find_image_number + ".gif", "depth":0.4},
+    {"name":find_image_name + find_image_number + ".gif", "depth":0.5},
 ]
 
 excluded_images = [

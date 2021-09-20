@@ -38,15 +38,21 @@ def colorRandomizer(dist, args):
             int(round(random.triangular(args[2][0], args[2][1], args[2][2]))),
             int(round(random.triangular(args[3][0], args[3][1], args[3][2])))
         )
+
+    # if dist == "M":
+    #     increments = 0
+    #     newIndex = random.randint(0, len(args) - 2)
+    #     newIncrement = random.randint(0, increments)
+    #     newRed = ((args[newIndex + 1][0] - args[newIndex][0]) / (increments + 1)) * newIncrement + args[newIndex][0]
+    #     newGreen = ((args[newIndex + 1][1] - args[newIndex][1]) / (increments + 1)) * newIncrement + args[newIndex][1]
+    #     newBlue = ((args[newIndex + 1][2] - args[newIndex][2]) / (increments + 1)) * newIncrement + args[newIndex][2]
+    #     newAlpha = ((args[newIndex + 1][3] - args[newIndex][3]) / (increments + 1)) * newIncrement + args[newIndex][3]
+    #     newColor = (int(round(newRed)), int(round(newGreen)), int(round(newBlue)), int(round(newAlpha)))
+
     if dist == "M":
-        increments = 1
-        newIndex = random.randint(0, len(args) - 2)
-        newIncrement = random.randint(0, increments)
-        newRed = ((args[newIndex + 1][0] - args[newIndex][0]) / (increments + 1)) * newIncrement + args[newIndex][0]
-        newGreen = ((args[newIndex + 1][1] - args[newIndex][1]) / (increments + 1)) * newIncrement + args[newIndex][1]
-        newBlue = ((args[newIndex + 1][2] - args[newIndex][2]) / (increments + 1)) * newIncrement + args[newIndex][2]
-        newAlpha = ((args[newIndex + 1][3] - args[newIndex][3]) / (increments + 1)) * newIncrement + args[newIndex][3]
-        newColor = (int(round(newRed)), int(round(newGreen)), int(round(newBlue)), int(round(newAlpha)))
+        newIndex = random.randint(0, len(args) - 1)
+        newColor = (args[newIndex][0], args[newIndex][1], args[newIndex][2], args[newIndex][3])
+
     return newColor
 
 
@@ -58,7 +64,10 @@ def genRandomizer(dist, params):
     return rand_num
 
 
-def imageGen(json_dir, mpeg7_dir):
+def imageGen(args, save_index):
+    random.seed()
+    json_dir = args['json_dir']
+    mpeg7_dir = args['mpeg7_dir']
     with open(json_dir) as f:
         json_data = json.load(f)
 
@@ -77,14 +86,20 @@ def imageGen(json_dir, mpeg7_dir):
     # make an empty dictionary to keep track of the images
     imageDic = {}
 
-    # make the background
-    composite = Image.new('RGBA', (params["background"]["width"], params["background"]["height"]),
-                          color=params["background"]["color"])
-
     # pre-generate all the image center points
     centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"],
                                params["centers"]["k"])
 
+    # check for find image close to boundary
+    if len(find_images) > 0:
+        imageNum = int(round((1 - find_images[0]["depth"]) * len(centerPoints), 0))
+        safety_adj = params["background"]["width"]/20
+        x, y = centerPoints[imageNum]
+
+        if x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
+            print(f"Index: {save_index} XY: {x},{y}.Target object is out of boundary, no image was generated.")
+            # return
+    
     # palce all the random images
     num = 0
     for newCenter in centerPoints:
@@ -110,6 +125,13 @@ def imageGen(json_dir, mpeg7_dir):
         imageDic[imageNum]["imageDir"] = item["name"]
         findIndices.append(imageNum)
 
+    # make the background
+    composite = Image.new('RGBA', (params["background"]["width"], params["background"]["height"]),
+                          color=(params["background"]["color"][0],
+                                params["background"]["color"][1],
+                                params["background"]["color"][2],
+                                params["background"]["color"][3]))
+
     # start pasting images
     for key in imageDic:
         newImageDir = imageDic[key]["imageDir"]
@@ -118,39 +140,39 @@ def imageGen(json_dir, mpeg7_dir):
             newImage,
             composite,
             imageDic[key]["center"],
-            imageDic[key]["scale"],
+            imageDic[key]["scale"]*1.4,
             imageDic[key]["rotation"],
             imageDic[key]["color"]
         )
 
     # save the final image
-    composite.save(save_dir + save_name + ".png", 'PNG')
+    composite.save(f"{save_dir}/{save_index:05d}_{save_name}.png", 'PNG')
 
     # make the easy find image
-    for i in findIndices:
-        findImageDir = imageDic[i]["imageDir"]
-        newImage = Image.open(mpeg7_dir + findImageDir)
-        composite = advPaste(
-            newImage,
-            composite,
-            imageDic[i]["center"],
-            imageDic[i]["scale"],
-            imageDic[i]["rotation"],
-            (255, 255, 255, 255)
-        )
+    # for i in findIndices:
+    #     findImageDir = imageDic[i]["imageDir"]
+    #     newImage = Image.open(mpeg7_dir + findImageDir)
+    #     composite = advPaste(
+    #         newImage,
+    #         composite,
+    #         imageDic[i]["center"],
+    #         imageDic[i]["scale"],
+    #         imageDic[i]["rotation"],
+    #         (255, 255, 255, 255)
+    #     )
 
-    # save the easy find image
-    composite.save(save_dir + save_name + "-find.png", 'PNG')
+    #save the easy find image
+    # composite.save(save_dir + str(save_index) + "-find.png", 'PNG')
 
-    # make json file
-    json_dic = {
-        "save_dir": save_dir,
-        "save_name": save_name,
-        "params": params,
-        "find_images": find_images,
-        "excluded_images": excluded_images,
-        "results": imageDic
-    }
+    # # make json file
+    # json_dic = {
+    #     "save_dir": save_dir,
+    #     "save_name": save_name,
+    #     "params": params,
+    #     "find_images": find_images,
+    #     "excluded_images": excluded_images,
+    #     "results": imageDic
+    # }
 
-    with open(save_dir + save_name + ".json", 'w') as json_file:
-        json.dump(json_dic, json_file, indent=4)
+    # with open(save_dir + save_name + ".json", 'w') as json_file:
+    #     json.dump(json_dic, json_file, indent=4)
