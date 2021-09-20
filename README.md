@@ -1,4 +1,4 @@
-# DHS_Image_Generation
+# 2D-Image-Generation-HCOMP
 
 # Generating an Image
 To generate an image using this code 4 steps are required:
@@ -24,7 +24,7 @@ The following sections will be used to explain how to change the parameters used
     "save_dir": "Image_Ouput/"
     ```
     ```json
-    "save_dir": "C:/Users/Joshua/Documents/DHS Project/Image_Output/"
+    "save_dir": "C:/Users/Joshua/Documents/Project/Image_Output/"
     ```
 2. `save_name`
     This input will be the text that is used to name the output files.
