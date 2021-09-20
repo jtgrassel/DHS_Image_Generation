@@ -119,11 +119,3 @@ def advPaste(img, background, centerPos, scale, rotation, color):
 
     comp = compPaste(img, background, pastePos)
     return comp
-
-#### FUNCTION TESTING ####
-# composite = Image.new('RGBA', (1080, 1080), color=(255,255,255,255))
-# newImage = Image.open('MPEG7/device3-11.gif')
-
-# composite = advPaste(newImage, composite, (500,500), 0.2, 45, (255,0,0,255))
-
-# composite.show()
