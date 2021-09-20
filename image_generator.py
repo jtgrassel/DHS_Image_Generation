@@ -64,64 +64,6 @@ excluded_images = json_data['excluded_images']
 save_dir = json_data['save_dir']
 save_name = json_data['save_name']
 
-# save_dir = "temp/"
-# save_name = "bat-7"
-# params =  {
-#     "background": {
-#         "color" : "black",
-#         "width" : 1920,
-#         "height" : 1080
-#     },
-#     "scale" : {
-#         "dist" : "U",
-#         "params" : (0.3, 0.4)
-#     },
-#     "rotation" : {
-#         "dist" : "U",
-#         "params" : (0, 365)
-#     },
-#     "color" : {
-#         "dist" : "U",
-#         "channels" : {
-#             "red" : (10, 255),
-#             "green" : (10, 255),
-#             "blue" : (10, 255),
-#             "alpha" : (150, 180)
-#         }
-#     },
-#     "centers" : {
-#         "r" : 150,
-#         "k" : 32
-#     }
-# }
-
-# find_images = [
-#     {"name":"bat-7.gif", "depth":0.5},
-# ]
-
-# excluded_images = [
-#     {"name":"bat-1.gif"},
-#     {"name":"bat-2.gif"},
-#     {"name":"bat-3.gif"},
-#     {"name":"bat-4.gif"},
-#     {"name":"bat-5.gif"},
-#     {"name":"bat-6.gif"},
-#     {"name":"bat-7.gif"},
-#     {"name":"bat-8.gif"},
-#     {"name":"bat-9.gif"},
-#     {"name":"bat-10.gif"},
-#     {"name":"bat-11.gif"},
-#     {"name":"bat-12.gif"},
-#     {"name":"bat-13.gif"},
-#     {"name":"bat-14.gif"},
-#     {"name":"bat-15.gif"},
-#     {"name":"bat-16.gif"},
-#     {"name":"bat-17.gif"},
-#     {"name":"bat-18.gif"},
-#     {"name":"bat-19.gif"},
-#     {"name":"bat-20.gif"}
-# ]
-
 fileList = allFiles("MPEG7dataset/original")
 
 # remove excluded images
