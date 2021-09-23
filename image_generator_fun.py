@@ -55,7 +55,7 @@ def genRandomizer(dist, params):
 
 
 def imageGen(args, save_index):
-    random.seed()
+
     json_dir = args['json_dir']
     mpeg7_dir = args['mpeg7_dir']
     with open(json_dir) as f:
@@ -76,21 +76,24 @@ def imageGen(args, save_index):
     # make an empty dictionary to keep track of the images
     imageDic = {}
 
-    # pre-generate all the image center points
-    centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"],
-                               params["centers"]["k"])
+    bound_con = True
+    while bound_con:
+        bound_con = False
+        # pre-generate all the image center points
+        centerPoints = poissonDisc(params["background"]["width"], params["background"]["height"], params["centers"]["r"],
+                                   params["centers"]["k"])
 
-    # check for find image close to boundary
-    if len(find_images) > 0:
-        imageNum = int(round((1 - find_images[0]["depth"]) * len(centerPoints), 0))
-        safety_adj = params["background"]["width"]/20
-        x, y = centerPoints[imageNum]
+        # check for find image close to boundary
+        if len(find_images) > 0:
+            imageNum = int(round((1 - find_images[0]["depth"]) * len(centerPoints), 0))
+            safety_adj = params["background"]["width"]/5
+            x, y = centerPoints[imageNum]
 
-        if x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
-            print(f"Index: {save_index} XY: {x},{y}.Target object is out of boundary, no image was generated.")
-            # return
+            if x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
+                print(f"Index: {save_index} XY: {x},{y}.Target object is out of boundary. Points regenerated")
+                bound_con = True
     
-    # palce all the random images
+    # place all the random images
     num = 0
     for newCenter in centerPoints:
         new_entry = {
@@ -122,7 +125,33 @@ def imageGen(args, save_index):
                                 params["background"]["color"][2],
                                 params["background"]["color"][3]))
 
-    # start pasting images
+    # make the negative image
+    for key in imageDic:
+        if key in findIndices:
+            continue
+        newImageDir = imageDic[key]["imageDir"]
+        newImage = Image.open(mpeg7_dir + newImageDir)
+        composite = advPaste(
+            newImage,
+            composite,
+            imageDic[key]["center"],
+            imageDic[key]["scale"],
+            imageDic[key]["rotation"],
+            imageDic[key]["color"]
+        )
+
+    # save the final image
+    composite.save(f"{save_dir}/Negative/{save_index:06d}_{save_name}.png", 'PNG')
+
+    # re-make the background
+    composite = Image.new('RGBA', (params["background"]["width"], params["background"]["height"]),
+                          color=(params["background"]["color"][0],
+                                 params["background"]["color"][1],
+                                 params["background"]["color"][2],
+                                 params["background"]["color"][3]))
+
+
+    # make the positive image
     for key in imageDic:
         newImageDir = imageDic[key]["imageDir"]
         newImage = Image.open(mpeg7_dir + newImageDir)
@@ -130,10 +159,39 @@ def imageGen(args, save_index):
             newImage,
             composite,
             imageDic[key]["center"],
-            imageDic[key]["scale"]*1.4,
+            imageDic[key]["scale"],
             imageDic[key]["rotation"],
             imageDic[key]["color"]
         )
 
     # save the final image
-    composite.save(f"{save_dir}/{save_index:05d}_{save_name}.png", 'PNG')
+    composite.save(f"{save_dir}/Positive/{save_index:06d}_{save_name}.png", 'PNG')
+
+    #make the easy find image
+    for i in findIndices:
+        findImageDir = imageDic[i]["imageDir"]
+        newImage = Image.open(mpeg7_dir + findImageDir)
+        composite = advPaste(
+            newImage,
+            composite,
+            imageDic[i]["center"],
+            imageDic[i]["scale"],
+            imageDic[i]["rotation"],
+            (255, 255, 255, 255)
+        )
+
+    #save the easy find image
+    composite.save(f"{save_dir}/White/{save_index:06d}_{save_name}.png", 'PNG')
+
+    # # make json file
+    # json_dic = {
+    #     "save_dir": save_dir,
+    #     "save_name": save_name,
+    #     "params": params,
+    #     "find_images": find_images,
+    #     "excluded_images": excluded_images,
+    #     "results": imageDic
+    # }
+
+    # with open(save_dir + save_name + ".json", 'w') as json_file:
+    #     json.dump(json_dic, json_file, indent=4)
