@@ -86,7 +86,7 @@ def imageGen(args, save_index):
         # check for find image close to boundary
         if len(find_images) > 0:
             imageNum = int(round((1 - find_images[0]["depth"]) * len(centerPoints), 0))
-            safety_adj = params["background"]["width"]/5
+            safety_adj = params["background"]["width"]*0.1
             x, y = centerPoints[imageNum]
 
             if x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
