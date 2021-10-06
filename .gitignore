@@ -1,5 +1,5 @@
 __pycache__/
 .venv/
 .idea/
-MPEG7/
-Output_Images/
+#MPEG7/
+#Output_Images/

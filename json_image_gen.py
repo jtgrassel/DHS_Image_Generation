@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     # Generates an number of images for each JSON file provided
     image_start = 0
-    image_count = 100000
+    image_count = 5000
     for jsonFile in jsonFiles:
         args = {
             'json_dir': jsonDir + jsonFile,
