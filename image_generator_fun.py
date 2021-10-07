@@ -90,7 +90,7 @@ def imageGen(args, save_index):
             x, y = centerPoints[imageNum]
 
             if x < safety_adj or y < safety_adj or x > params["background"]["width"]-safety_adj or y > params["background"]["height"]-safety_adj:
-                print(f"Index: {save_index} XY: {x},{y}.Target object is out of boundary. Points regenerated")
+                #print(f"Index: {save_index} XY: {x},{y}.Target object is out of boundary. Points regenerated")
                 bound_con = True
     
     # place all the random images
